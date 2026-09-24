@@ -8,9 +8,9 @@ test('Root GitHub Pages entry point uses existing app with public asset paths',a
   assert.ok(fs.existsSync(p.join(root,file)),file);
  }
  assert.match(html,/window\.RemodulatedConfig=\{assetBase:'public'\}/);
+ assert.match(html,/data-asset-path="data\/card-costs\.json"/);
  assert.match(html,/href="public\/css\/font-staw\.css"/);
  assert.match(html,/src="src\/app\.js"/);
- assert.match(html,/href="public\/data\/card-costs\.json"/);
  assert.match(css,/url\('public\/fonts\/Swiss1\.ttf'\)/);
  assert.match(css,/url\('src\/favicon\.svg'\)/);
  const server=http.createServer((req,res)=>{
