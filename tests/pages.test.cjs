@@ -14,5 +14,6 @@ test('Root GitHub Pages entry point uses existing app with public asset paths',(
  assert.match(css,/url\('public\/fonts\/Swiss1\.ttf'\)/);
  assert.match(css,/url\('src\/favicon\.svg'\)/);
  assert.match(app,/const assetPath=path=>/);
+ assert.match(app,/const assetUrl=path=>/);
  assert.match(app,/fetch\(assetPath\('data\/'\+f\+'\.json'\)\)/);
 });
