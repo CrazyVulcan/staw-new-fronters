@@ -1,0 +1,47 @@
+const assert=require('node:assert/strict'),p=require('path'),fs=require('fs');
+const {chromium}=require(process.env.STAW_NODE_MODULES?p.join(process.env.STAW_NODE_MODULES,'playwright'):'playwright');
+(async()=>{
+ const outputDir=process.env.STAW_QA_OUTPUT||p.resolve(__dirname,'..');fs.mkdirSync(outputDir,{recursive:true});
+ const browser=await chromium.launch({channel:'msedge',headless:true}),page=await browser.newPage({viewport:{width:1440,height:1000}});
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
+ await page.goto('http://127.0.0.1:4173');await page.waitForFunction(()=>!!window.STAW);
+ assert.equal(await page.evaluate(()=>STAW.cards.length),2373);
+ await page.locator('#search').fill('S274');assert.equal(await page.locator('.catalog-entry').count(),1);
+ await page.locator('[data-add="ship:S274"]').click();assert.equal(await page.locator('#total').textContent(),'26');
+ await page.locator('[data-choose="captain"]').click();await page.locator('#search').fill('Cap049');await page.locator('[data-add="captain:Cap049"]').click();
+ console.log('Picard total',await page.locator('#total').textContent());assert.equal(await page.locator('#total').textContent(),'32');
+ await page.selectOption('#type','crew');await page.locator('#search').fill('C441');await page.locator('[data-add="crew:C441"]').click();
+ console.log('With Data',await page.locator('#total').textContent());assert.equal(await page.locator('#total').textContent(),'35');
+ const original=await page.evaluate(()=>JSON.stringify(STAW.saveObject().fleet));
+ await page.evaluate(()=>STAW.equip('ship:S274'));assert.equal(await page.evaluate(()=>STAW.fleet.ships.length),1);
+ await page.locator('#export').click();assert.ok((await page.locator('#export-text').inputValue()).startsWith('S274\nCap049\nC441'));
+ await page.locator('#export-json').click();const exp=JSON.parse(await page.locator('#export-text').inputValue());assert.equal(exp.schemaVersion,2);assert.equal(exp.ships[0].cards[1].cardId,'C441');await page.locator('#close-modal').click();
+ await page.evaluate(()=>STAW.loadText(JSON.stringify(STAW.saveObject())));assert.equal(await page.evaluate(()=>JSON.stringify(STAW.saveObject().fleet)),original);
+ await page.evaluate(()=>{const before=JSON.stringify(STAW.saveObject().fleet);try{STAW.loadText('S274\nDOES_NOT_EXIST')}catch{}if(before!==JSON.stringify(STAW.saveObject().fleet))throw Error('Failed import mutated fleet');});
+ await page.locator('#cost-editor').click();await page.locator('#cost-search').fill('S274');await page.locator('[data-cost="ship:S274"]').fill('20');await page.locator('[data-cost="ship:S274"]').blur();await page.locator('#close-modal').click();
+ await page.selectOption('#point-mode','spuds');assert.equal(await page.locator('#total').textContent(),'29');
+ await page.reload();await page.waitForFunction(()=>!!window.STAW);assert.equal(await page.locator('#total').textContent(),'29');
+ await page.selectOption('#point-mode','standard');assert.equal(await page.locator('#total').textContent(),'35');
+ await page.evaluate(()=>STAW.loadText('S274\nCap049\nC441'));assert.equal(await page.locator('#total').textContent(),'35');
+ await page.evaluate(()=>STAW.loadText('S274\nC114\n#T271'));assert.equal(await page.locator('.fleet-card.hidden-card').count(),1);
+ await page.locator('#export').click();assert.match(await page.locator('#export-text').inputValue(),/\n#T271\n/);await page.locator('#close-modal').click();
+ await page.reload();await page.waitForFunction(()=>!!window.STAW);assert.equal(await page.locator('.fleet-card.hidden-card').count(),1);
+ await page.evaluate(()=>STAW.loadText('S274\nCap049\nC441'));
+ await page.locator('#fleet-name').fill('Task Force Enterprise');
+ await page.selectOption('#type','ship');await page.selectOption('#faction','federation');await page.locator('#search').fill('');
+ await page.screenshot({path:p.join(outputDir,'preview-desktop.png'),fullPage:false});
+ await page.setViewportSize({width:390,height:844});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+ await page.screenshot({path:p.join(outputDir,'preview-mobile.png'),fullPage:false});
+ await page.setViewportSize({width:1440,height:1000});
+ console.log('Extra audit',await page.evaluate(()=>{
+  const d=STAW.cards.filter(c=>c.type==='captain'&&(c.factions||[]).includes('romulan')&&c.cost===3)[0];STAW.loadText('S274');STAW.equip('captain:'+d.id);return {captain:d.id,total:STAW.engine.getFleetCost(STAW.fleet),expected:30};
+ }));
+ assert.equal(await page.locator('#total').textContent(),'30');
+ // Missing routes are explicit and never produce partial exports.
+ await page.evaluate(()=>STAW.loadText('S199'));
+ await page.locator('#export').click();assert.match(await page.locator('#modal-content').textContent(),/no verified route/);await page.locator('#close-modal').click();
+ await page.evaluate(()=>STAW.loadText('S274\nCap049\nC441'));
+ assert.deepEqual(errors,[]);
+ console.log('Browser QA passed: load, search, equip, uniqueness, totals, faction penalty, SPUDS, persistence, rollback, exports, missing routes, mobile layout.');
+ await browser.close();
+})().catch(e=>{console.error(e);process.exit(1);});

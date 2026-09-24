@@ -1,0 +1,153 @@
+'use strict';
+const $el=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const nice=s=>String(s).replace(/[-_]/g,' ').replace(/\b\w/g,c=>c.toUpperCase()),key=FleetCore.key;
+let cards=[],catalogCards=[],byKey={},sets={},routes={},aliases={},costs=[],engine,valueOf,slots,clone,sanitize,pointMode='standard';
+let fleet={ships:[]},selected=-1,page=0,pageSize=12,view='spread',selectedSlot=null,ready=false,lastToast=0,importing=false;
+function toast(message){if(importing)return;$el('toast').textContent=message;$el('toast').style.display='block';clearTimeout(lastToast);lastToast=setTimeout(()=>$el('toast').style.display='none',5000);}
+function modal(html){$el('modal-content').innerHTML=html;if(!$el('modal').open)$el('modal').showModal();}
+function download(name,text,type='application/json'){const url=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function ruleText(c){return sanitize((c.text||'').replace(/\[([a-zA-Z0-9_-]+)\]/g,(_,s)=>'<span class="fs fs-'+s.replace(/_text$/,'')+'" title="'+nice(s)+'" aria-label="'+nice(s)+'"></span>').replace(/\n/g,'<br>'));}
+function cost(card,ship){if(ship&&valueOf(card,'free',ship,fleet))return 0;const n=valueOf(card,'cost',ship||undefined,ship?fleet:undefined);return Number.isFinite(n)?n:0;}
+function activeSlot(){if(selectedSlot===null)return null;const root=selected===-2?fleet.resource:currentShip();return root?slots(root)[selectedSlot]:null;}
+function equipUpgrade(root,slot,card){const equipped=engine.setUpgrade(fleet,root,slot,card);if(equipped)RemodulatedRules.enhanceEquippedCard(equipped,slot);return equipped;}
+function isCatalogCompatible(card,slot,root){if(!slot)return true;if(!engine.isUpgradeCompatible(card,slot,root,fleet))return false;if(slot.canEquip&&!slot.canEquip(card,root,fleet,slot))return false;return valueOf(card,'canEquip',root,fleet,slot)!==false&&valueOf(card,'canEquipFaction',root,fleet,slot)!==false;}
+function applyCosts(){const values=new Map(costs.map(c=>[key(c),c]));for(const c of cards){if(c._standardCost===undefined)c._standardCost=c.cost;const row=values.get(key(c));c.cost=pointMode==='spuds'&&row?.spudsCost!==null&&row?.spudsCost!==undefined?row.spudsCost:typeof c._standardCost==='function'?c._standardCost:row?.cost??c._standardCost;}}
+function saveObject(){return {format:'staw-remodulated',version:1,name:$el('fleet-name').value,limit:Number($el('budget').value),pointMode,costProfile:costs,fleet:engine.saveFleet(fleet)};}
+function persist(){if(!ready||importing)return;try{localStorage.setItem('staw-remodulated-fleet',JSON.stringify(saveObject()));}catch{toast('Browser storage is unavailable. Use Save fleet to keep your list.');}}
+function restoreFleet(saved){
+ const canonical=FleetCore.canonicalize(saved,aliases,byKey),next={ships:[]};
+ function populate(c,out,root){
+  for(const field of ['resource','captain','admiral','ambassador','construction'])if(c[field]){
+   const child=clone(byKey[c[field].id]),expected=field==='construction'?'starship_construction':field;
+   if(field!=='resource'&&child.type!==expected)throw Error('Invalid '+field+' assignment: '+c[field].id);
+   out[field]=child;populate(c[field],child,root);
+  }
+  for(const field of ['upgrades','upgradeSlots'])for(let i=0;i<(c[field]||[]).length;i++){
+   if(!c[field][i].id)continue;const slot=out[field]?.[i];
+   if(!slot)throw Error('Saved slot no longer exists: '+c.id+' / '+field+' '+i);
+   const child=clone(byKey[c[field][i].id]);
+   if(!engine.isUpgradeCompatible(child,slot,root,next))throw Error('Wrong card type in saved slot: '+c[field][i].id);
+   slot.occupant=child;RemodulatedRules.enhanceEquippedCard(child,slot);valueOf(child,'onEquip',root,next);populate(c[field][i],child,root);
+  }
+ }
+ if(canonical.resource){next.resource=clone(byKey[canonical.resource.id]);populate(canonical.resource,next.resource,next.resource);}
+ for(const savedShip of canonical.ships){const ship=clone(byKey[savedShip.id]);next.ships.push(ship);populate(savedShip,ship,ship);}
+ return next;
+}
+function changePointMode(mode){const saved=engine.saveFleet(fleet);pointMode=mode;applyCosts();fleet=restoreFleet(saved);selectedSlot=null;render();}
+function currentShip(){return fleet.ships[selected];}
+function costBreakdown(c,ship){const rows=valueOf(c,'cost',ship,fleet,undefined,{modifiers:true})||[];return '<div class="cost-breakdown">'+rows.map((r,i)=>'<span>'+esc(i===0&&pointMode==='spuds'?'SPUDS base':r.source)+': <strong>'+esc(r.value)+'</strong></span>').join('')+(valueOf(c,'free',ship,fleet)?'<span>Card ability: free (0 SP)</span>':'')+'</div>';}
+function imageMarkup(c){const r=routes[key(c)];if(r?.localImage)return '<img class="card-image" loading="lazy" src="'+esc(r.localImage)+'" alt="'+esc(c.name+' — '+c.id)+'">';if(r&&r.width===1)return '<img class="card-image" loading="lazy" src="'+esc(r.face)+'" alt="'+esc(c.name)+'">';if(r)return '<div class="card-image" role="img" aria-label="'+esc(c.name)+'" style="background-image:url('+esc(r.face)+');background-size:'+r.width*100+'% '+r.height*100+'%;background-position:'+((r.index%r.width)/(r.width-1)*100)+'% '+(Math.floor(r.index/r.width)/(r.height-1)*100)+'%"></div>';return fallback(c);}
+function fallback(c){return '<div class="fallback"><div class="type-band">'+esc(nice(c.type))+'</div><div class="card-title">'+(c.unique?'◆ ':'')+esc(c.name)+'</div>'+(c.class?'<small>'+esc(c.class)+'</small>':'')+'<div class="rules">'+ruleText(c)+'</div>'+(c.type==='ship'?'<div class="stats"><span>'+esc(c.attack)+'</span><span>'+esc(c.agility)+'</span><span>'+esc(c.hull)+'</span><span>'+esc(c.shields)+'</span></div>':'')+'<span class="cost-circle">'+cost(c)+' SP</span></div>';}
+function face(c){return '<button class="card-face" data-detail="'+esc(key(c))+'" aria-label="View '+esc(c.name)+' '+esc(c.id)+'"'+(routes[key(c)]?.aspect?' style="aspect-ratio:'+routes[key(c)].aspect+'"':'')+'>'+imageMarkup(c)+'</button>';}
+function renderCatalog(){
+ const query=$el('search').value.toLowerCase().trim(),faction=$el('faction').value,type=$el('type').value,set=$el('set').value,sort=$el('sort').value;
+ const chosen=activeSlot(),root=selected===-2?fleet.resource:currentShip();
+ const results=catalogCards.filter(c=>isCatalogCompatible(c,chosen,root)&&(!type||c.type===type)&&(!faction||(c.factions||[]).includes(faction))&&(!set||(c.set||[]).includes(set))&&(!$el('tts-only').checked||routes[key(c)])&&(!$el('unique-only').checked||c.unique)&&(!query||[c.name,c.id,c.class,c.text].join(' ').toLowerCase().includes(query)));
+ results.sort((a,b)=>sort==='cost'?cost(a)-cost(b)||a.name.localeCompare(b.name):sort==='cost-desc'?cost(b)-cost(a)||a.name.localeCompare(b.name):sort==='skill'?(Number(b.skill)||0)-(Number(a.skill)||0):sort==='id'?a.id.localeCompare(b.id,undefined,{numeric:true}):a.name.localeCompare(b.name)||a.id.localeCompare(b.id));
+ const pages=Math.max(1,Math.ceil(results.length/pageSize));page=Math.min(page,pages-1);
+ $el('library-count').textContent=results.length+(chosen?' compatible':' cards');$el('page-info').textContent=(page+1)+' / '+pages;$el('prev').disabled=page===0;$el('next').disabled=page===pages-1;
+ $el('catalog').innerHTML=results.slice(page*pageSize,(page+1)*pageSize).map(c=>'<article class="catalog-entry" draggable="true" data-drag="'+esc(key(c))+'">'+face(c)+'<div class="card-meta"><code>'+esc(c.id)+'</code><span class="points">'+cost(c)+' SP</span></div><span class="card-name">'+esc(c.name)+'</span><button class="add-card" data-add="'+esc(key(c))+'">'+(c.type==='ship'?'+ Add ship':c.type==='token'?'View reference':c.type==='resource'?'+ Fleet resource':'+ Equip card')+'</button></article>').join('')||'<p class="empty">No cards match these filters. Try another faction or clear your search.</p>';
+}
+function fleetCard(c,s,index,hidden=false){const caps=RemodulatedRules.capabilityLabels(c);return '<div class="fleet-card '+(hidden?'hidden-card':'')+'">'+face(c)+'<div class="card-meta"><code>'+(hidden?'<span class="hidden-mark">#</span>':'')+esc(c.id)+'</code><span class="points">'+cost(c,s)+' SP</span></div><span class="card-name">'+esc(c.name)+'</span>'+(hidden?'<div class="hidden-status"><span aria-hidden="true">◒</span> Hidden · exports as #'+esc(c.id)+'</div>':'')+(caps.length?'<div class="capabilities">'+caps.map(label=>'<span>'+esc(label)+'</span>').join('')+'</div>':'')+(c!==s?'<button class="remove" data-remove-card="'+index+'" data-ship="'+fleet.ships.indexOf(s)+'">Remove</button>':'')+'</div>';}
+function allCards(ship){return FleetCore.walk(ship);}
+function allEntries(ship){return FleetCore.walkEntries(ship);}
+function slotOwner(root,target){if(!root)return null;if((root.upgrades||[]).includes(target)||(root.upgradeSlots||[]).includes(target))return root;for(const c of FleetCore.walk(root).slice(1))if((c.upgradeSlots||[]).includes(target))return c;return null;}
+function shipSlots(s,i){const defs=[['captain','Captain'],['admiral','Admiral'],['ambassador','Ambassador'],['construction','Construction']];let html=defs.filter(([field])=>!s[field]&&(field!=='construction'||s.alliance)).map(([f,n])=>'<button class="slot-button" data-choose="'+f+'" data-ship="'+i+'">+ '+n+'</button>').join('');
+ if(fleet.resource?.slotType&&!s.resource)html+='<button class="slot-button" data-choose="'+esc(fleet.resource.slotType)+'" data-ship="'+i+'">+ '+nice(fleet.resource.slotType)+'</button>';
+ slots(s).forEach((slot,n)=>{if(!slot.occupant&&!valueOf(slot,'hide',s,fleet)){const owner=slotOwner(s,slot),base=slot._sharedRule?'Same slot · '+slot.source:slot.rules||(owner&&owner!==s?'Added by '+owner.name:'Printed slot'),note=(slot.faceDown?'Hidden · ':'')+base;html+='<button class="slot-button '+(selected===i&&selectedSlot===n?'active':'')+'" data-slot="'+n+'" data-ship="'+i+'"><span>'+(slot.type||[]).map(t=>'<i class="fs fs-'+esc(t)+'" aria-hidden="true"></i>'+nice(t)).join(' / ')+'</span><small>'+esc(note)+'</small></button>';}});return html;
+}
+function fleetWarnings(){const messages=[],used=new Map();for(const c of [...fleet.ships.flatMap(allCards),...FleetCore.walk(fleet.resource)]){if(c.unique){const k=c.name+'|'+!!c.mirror;if(used.has(k))messages.push('Unique card appears more than once: '+c.name);used.set(k,true);}}
+ for(const ship of fleet.ships){for(const c of allCards(ship).slice(1)){const rule=c.type==='captain'?'canEquipCaptain':c.type==='admiral'?'canEquipAdmiral':c.type==='ambassador'?'canEquipAmbassador':'canEquip';if(c[rule]!==undefined&&valueOf(c,rule,ship,fleet)===false)messages.push(c.name+' no longer meets the equipment rules on '+ship.name+'.');}}
+ if(fleet.ships.filter(s=>s.admiral).length>1)messages.push('A fleet may have only one Admiral.');
+ if(pointMode==='spuds'&&!costs.some(c=>c.spudsCost!==null))messages.push('No SPUDS overrides are set yet. Standard costs are being used.');return [...new Set(messages)];}
+function renderFleet(){
+ let total=engine.getFleetCost(fleet);if(fleet.resource)total+=slots(fleet.resource).filter(s=>s.occupant).reduce((n,s)=>n+cost(s.occupant,fleet.resource),0);
+ const limit=Number($el('budget').value)||130;$el('total').textContent=total;$el('limit').textContent=limit;$el('remaining').textContent=total>limit?(total-limit)+' points over limit':(limit-total)+' points available';document.querySelector('.fleet-total').classList.toggle('over-budget',total>limit);
+ $el('equip-target').textContent=currentShip()?'Equipping '+currentShip().name+' · '+currentShip().id+(selectedSlot!==null?' · selected upgrade slot':''):'Select a ship to assign its captain and upgrades.';
+ $el('fleet').className=view==='list'?'compact':'';
+ $el('fleet').innerHTML=fleet.ships.map((s,i)=>'<article class="ship-row '+(selected===i?'selected':'')+'" data-drop-ship="'+i+'"><header class="ship-header"><button class="ship-select" data-select="'+i+'">'+String(i+1).padStart(2,'0')+' / '+esc(s.name)+'<small>'+esc(s.class)+' · '+esc((s.factions||[]).map(nice).join(' / '))+'</small></button><span class="ship-cost">'+engine.getTotalCost(s,fleet)+' <small>SP</small></span><div class="ship-controls"><button data-move="'+i+'" data-dir="-1" aria-label="Move ship up" '+(i===0?'disabled':'')+'>↑</button><button data-move="'+i+'" data-dir="1" aria-label="Move ship down" '+(i===fleet.ships.length-1?'disabled':'')+'>↓</button><button data-remove-ship="'+i+'" aria-label="Remove '+esc(s.name)+'">×</button></div></header><div class="ship-cards">'+allEntries(s).map((entry,n)=>fleetCard(entry.card,s,n,entry.hidden)).join('')+'</div><div class="slot-panel">'+shipSlots(s,i)+'</div></article>').join('')||'<div class="fleet-empty"><span class="fs fs-federation" aria-hidden="true"></span><h3>Every fleet starts with a flagship.</h3><p>Find a ship in the library and choose <strong>Add ship</strong>. Then fill its captain and upgrade slots to assemble your fleet.</p><button id="browse-ships">Browse ships</button></div>';
+ if(fleet.resource){$el('fleet').innerHTML+='<article class="ship-row"><header class="ship-header"><strong>Fleet resource</strong><button id="remove-resource">Remove resource</button></header><div class="ship-cards">'+allEntries(fleet.resource).map((entry,i)=>fleetCard(entry.card,fleet.resource,i,entry.hidden)).join('')+'</div><div class="slot-panel">'+slots(fleet.resource).map((slot,n)=>!slot.occupant?'<button class="slot-button" data-resource-slot="'+n+'">+ '+slot.type.map(nice).join(' / ')+'</button>':'').join('')+'</div></article>';}
+ $el('validation').innerHTML=fleetWarnings().map(m=>'<div class="warning">'+esc(m)+'</div>').join('');
+}
+function render(){if(importing)return;renderCatalog();renderFleet();persist();}
+function equip(id,preferHidden=false){
+ const c=byKey[id];if(!c)return false;let result=false,ship=currentShip();
+ if(c.type==='token'){if(!importing)detail(id);return false;}
+ if(c.type==='ship'){result=engine.addFleetShip(fleet,c);if(result)selected=fleet.ships.length-1;}
+ else if(c.type==='resource'){engine.setFleetResource(fleet,clone(c));result=true;}
+ else if(selected===-2&&fleet.resource){const slot=slots(fleet.resource)[selectedSlot];if(slot)result=equipUpgrade(fleet.resource,slot,c);}
+ else if(!ship){toast('Add or select a ship first.');return false;}
+ else if(c.OnePerShip&&allCards(ship).some(x=>x.name===c.name)){toast(c.name+' is limited to one per ship.');return false;}
+ else if(selectedSlot!==null){const slot=slots(ship)[selectedSlot];if(slot&&!slot.occupant)result=equipUpgrade(ship,slot,c);}
+ else if(preferHidden){const hidden=slots(ship).find(slot=>slot.faceDown&&!slot.occupant&&engine.isUpgradeCompatible(c,slot,ship,fleet));if(hidden)result=equipUpgrade(ship,hidden,c);}
+ else if(c.type==='captain'){const special=slots(ship).find(s=>!s.occupant&&engine.isUpgradeCompatible(c,s,ship,fleet));if(importing&&ship.captain){if(special)result=equipUpgrade(ship,special,c);}else result=engine.setShipCaptain(fleet,ship,c);}
+ else if(c.type==='admiral'){if(fleet.ships.some(s=>s!==ship&&s.admiral)){toast('Your fleet already has an Admiral.');return false;}result=engine.setShipAdmiral(fleet,ship,c);}
+ else if(c.type==='ambassador')result=engine.setShipAmbassador(fleet,ship,c);
+ else if(c.type==='starship_construction')result=engine.setShipConstruction(fleet,ship,c);
+ else if(c.type===fleet.resource?.slotType)result=engine.setShipResource(fleet,ship,c);
+ else{const available=slots(ship),candidates=selectedSlot!==null?[available[selectedSlot]]:available;for(const slot of candidates){if(slot&&!slot.occupant&&engine.isUpgradeCompatible(c,slot,ship,fleet)&&equipUpgrade(ship,slot,c)){result=true;break;}}}
+ if(result){selectedSlot=null;render();toast(c.name+(c.type==='ship'?' added to fleet.':' equipped.'));}else toast('Cannot equip '+c.name+'. Check available slots, uniqueness, faction and card restrictions.');
+ return !!result;
+}
+function detail(id){const ship=currentShip(),c=allCards(ship).find(c=>key(c)===id)||byKey[id];if(!c)return;modal('<div class="detail"><div>'+face(c)+'</div><div><span class="eyebrow">'+esc(nice(c.type))+' / '+esc(c.id)+'</span><h2>'+esc(c.name)+'</h2><p>'+esc((c.factions||[]).map(nice).join(' / '))+(c.class?' · '+esc(c.class):'')+'</p><div class="detail-stats">'+['cost','skill','attack','agility','hull','shields'].filter(k=>c[k]!==undefined).map(k=>'<span>'+nice(k)+'<strong>'+esc(k==='cost'?cost(c):typeof c[k]==='function'?'Variable':c[k])+'</strong></span>').join('')+'</div><div class="rules">'+ruleText(c)+'</div><p>'+esc((c.set||[]).map(id=>sets[id]?.name||id).join(' · '))+'</p><p class="tag">'+(routes[id]?'Verified TTS card route':'Not mapped in supplied TTS save')+'</p>'+(ship?'<p>On '+esc(ship.name)+': <strong>'+cost(c,ship)+' SP</strong></p>'+costBreakdown(c,ship)+'':'')+'<div class="dialog-actions">'+(c.type!=='token'?'<button class="primary" data-add="'+esc(id)+'">'+(c.type==='ship'?'Add ship':'Equip card')+'</button>':'')+'</div></div></div>');}
+function exportDialog(){let output;try{const warnings=fleetWarnings().filter(s=>!s.startsWith('No SPUDS'));if(warnings.length)throw Error(warnings.join('\n'));output=FleetCore.ttsExport(fleet,routes);}catch(e){modal('<h2>TTS export needs attention</h2><p class="error-message">'+esc(e.message)+'</p><p>The supplied mod has a verified subset of the full Utopia catalog. The ID audit lists the remaining mappings.</p><a href="data/id-audit.json" download>Download mapping audit</a>');return;}
+ modal('<h2>Deploy your fleet</h2><p>Copy this list into <strong>Fleet Setup</strong> in Star Trek Attack Wing Remodulated. Ship groups and exact card IDs match the supplied save.</p><div class="dialog-actions"><button id="export-ids" class="active">Utopia ID list</button><button id="export-json">TTS JSON</button><button id="copy-export" class="primary">Copy to clipboard</button><button id="download-export">Download</button></div><textarea id="export-text" class="export-text" readonly aria-label="TTS export">'+esc(output)+'</textarea><p>The mod spawns cards from these IDs. Its printed card values are unchanged by a SPUDS override; your saved fleet retains your selected cost profile.</p>');
+ let mode='text';$el('export-ids').onclick=()=>{mode='text';$el('export-text').value=FleetCore.ttsExport(fleet,routes);};$el('export-json').onclick=()=>{mode='json';$el('export-text').value=FleetCore.ttsExport(fleet,routes,mode);};$el('download-export').onclick=()=>download('remodulated-fleet.'+(mode==='json'?'json':'txt'),$el('export-text').value,mode==='json'?'application/json':'text/plain');$el('copy-export').onclick=async()=>{try{await navigator.clipboard.writeText($el('export-text').value);toast('Fleet copied.');}catch{$el('export-text').select();toast('Select and copy the highlighted list.');}};
+}
+function importDialog(){modal('<h2>Import a fleet</h2><p>Paste a saved Remodulated fleet, an original Utopia URL, Utopia fleet JSON, or a TTS ID list. Import replaces the current fleet after the entire list is checked.</p><textarea id="import-text" class="export-text" aria-label="Fleet to import" placeholder="Paste your fleet here…"></textarea><div class="dialog-actions"><input type="file" id="import-file" accept=".json,.txt" aria-label="Choose fleet file"><button class="primary" id="load-fleet">Load fleet</button></div><p id="import-error" class="error-message"></p>');$el('import-file').onchange=async e=>{if(e.target.files[0])$el('import-text').value=await e.target.files[0].text();};$el('load-fleet').onclick=()=>{try{loadText($el('import-text').value);$el('modal').close();toast('Fleet imported.');}catch(e){$el('import-error').textContent=e.message;}};}
+function loadText(text){
+ let data;const trimmed=text.trim();
+ if(trimmed.startsWith('{'))data=JSON.parse(trimmed);
+ else if(/^(?:https?:\/\/|file:\/\/)[^\r\n]*#/.test(trimmed)){const hash=trimmed.split('#').slice(1).join('#');try{data=JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(hash)))));}catch{data=JSON.parse(atob(hash));}}
+ else{
+  const saveBefore=engine.saveFleet(fleet),previousSelected=selected;fleet={ships:[]};selected=-1;selectedSlot=null;importing=true;
+  try{for(const raw of trimmed.split(/\r?\n/)){const marked=raw.trim(),hidden=marked.startsWith('#'),id=marked.replace(/^#/,'').trim();if(/^---|^Generated by/i.test(id))break;if(!id)continue;const candidates=cards.filter(c=>c.id===id||aliases[c.type+':'+id]===key(c));if(candidates.length!==1)throw Error('Unknown or ambiguous ID: '+marked);const c=candidates[0];if(!equip(key(c),hidden))throw Error('Card cannot be assigned: '+c.name+' ('+marked+')');}if(!fleet.ships.length)throw Error('No ships in this list.');data={fleet:engine.saveFleet(fleet)};}finally{fleet=restoreFleet(saveBefore);selected=previousSelected;importing=false;}
+ }
+ if(data.schemaVersion===2){const marked=c=>(c.hidden?'#':'')+c.cardId,lines=data.ships.flatMap(s=>[s.shipCardId,...(s.cards||[]).map(marked)]).concat((data.resources||[]).map(marked));return loadText(lines.join('\n'));}
+ const oldMode=pointMode,oldCosts=costs;if(data.costProfile){FleetCore.validateCosts(data.costProfile,byKey);if(data.costProfile.length!==costs.length)throw Error('Saved cost profile is incomplete.');costs=data.costProfile;}
+ pointMode=data.pointMode==='spuds'?'spuds':'standard';applyCosts();let next;try{next=restoreFleet(data.fleet||data);}catch(e){pointMode=oldMode;costs=oldCosts;applyCosts();throw e;}
+ if(data.costProfile)localStorage.setItem('staw-remodulated-costs',JSON.stringify(costs));
+ fleet=next;selected=fleet.ships.length?0:-1;selectedSlot=null;$el('fleet-name').value=data.name||'Imported fleet';$el('budget').value=Number(data.limit)>0?data.limit:130;$el('point-mode').value=pointMode;render();
+}
+function costEditor(){modal('<h2>SPUDS cost editor</h2><p>Set a SPUDS value to override a card’s base points. Leave it blank to use the standard value. Changes here stay in this browser until you download the catalog. To make them the site default, replace <code>public/data/card-costs.json</code> with the downloaded file.</p><div class="dialog-actions"><input id="cost-search" placeholder="Search name or ID…" aria-label="Search cost catalog"><button id="download-costs">Download all card costs</button><label>Import costs <input id="cost-file" type="file" accept=".json"></label></div><div id="cost-rows"></div>');
+ const draw=()=>{const q=$el('cost-search').value.toLowerCase(),filtered=costs.filter(c=>[c.id,c.name].join(' ').toLowerCase().includes(q));$el('cost-rows').innerHTML='<table class="cost-table"><caption>'+filtered.length+' matches · showing first 50</caption><thead><tr><th>ID</th><th>Card</th><th>Standard</th><th>SPUDS</th></tr></thead><tbody>'+filtered.slice(0,50).map(c=>'<tr><td>'+esc(c.id)+'</td><td>'+esc(c.name)+'<br><small>'+nice(c.type)+'</small></td><td>'+esc(c.cost??'Variable')+'</td><td><input aria-label="SPUDS cost for '+esc(c.id)+'" data-cost="'+esc(key(c))+'" type="number" min="0" step="1" value="'+(c.spudsCost??'')+'"></td></tr>').join('')+'</tbody></table>';};
+ $el('cost-search').oninput=draw;$el('download-costs').onclick=()=>download('card-costs.json',JSON.stringify(costs,null,2));$el('cost-file').onchange=async e=>{if(!e.target.files[0])return;try{const v=FleetCore.validateCosts(JSON.parse(await e.target.files[0].text()),byKey);if(v.length!==costs.length)throw Error('Import must include all '+costs.length+' cards.');costs=v;saveCosts();draw();toast('Cost catalog imported.');}catch(e){toast(e.message);}};draw();
+}
+function saveCosts(){localStorage.setItem('staw-remodulated-costs',JSON.stringify(costs));changePointMode(pointMode);}
+document.addEventListener('change',e=>{if(e.target.dataset.cost){const row=costs.find(c=>key(c)===e.target.dataset.cost),value=e.target.value===''?null:Number(e.target.value);if(value!==null&&(!Number.isFinite(value)||value<0)){toast('Use a non-negative cost.');return;}row.spudsCost=value;saveCosts();}});
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||!ready)return;const d=b.dataset;
+ if(d.detail){const row=b.closest('[data-drop-ship]');if(row)selected=Number(row.dataset.dropShip);detail(d.detail);}if(d.add)equip(d.add);
+ if(d.select!==undefined){selected=Number(d.select);selectedSlot=null;renderFleet();}
+ if(d.removeShip!==undefined){engine.removeFromFleet(fleet.ships[Number(d.removeShip)],fleet);selected=Math.min(selected,fleet.ships.length-1);selectedSlot=null;render();}
+ if(d.removeCard!==undefined){const s=Number(d.ship)===-1?fleet.resource:fleet.ships[Number(d.ship)],c=allCards(s)[Number(d.removeCard)];engine.removeFromFleet(c,fleet);render();}
+ if(d.move!==undefined){const i=Number(d.move),j=i+Number(d.dir);if(j>=0&&j<fleet.ships.length){[fleet.ships[i],fleet.ships[j]]=[fleet.ships[j],fleet.ships[i]];selected=j;render();}}
+ if(d.choose!==undefined||d.slot!==undefined){selected=Number(d.ship);selectedSlot=d.slot!==undefined?Number(d.slot):null;const type=d.choose||'';$el('type').value=type==='construction'?'starship_construction':type;$el('search').value='';page=0;render();}
+ if(d.resourceSlot!==undefined){selected=-2;selectedSlot=Number(d.resourceSlot);$el('type').value=slots(fleet.resource)[selectedSlot].type[0];render();}
+ if(b.id==='remove-resource'){engine.removeFromFleet(fleet.resource,fleet);render();}if(b.id==='browse-ships'){$el('type').value='ship';$el('search').value='';renderCatalog();$el('search').focus();}
+});
+document.addEventListener('dragstart',e=>{const c=e.target.closest('[data-drag]');if(c)e.dataTransfer.setData('text/plain',c.dataset.drag);});document.addEventListener('dragover',e=>{if(e.target.closest('[data-drop-ship]'))e.preventDefault();});document.addEventListener('drop',e=>{const t=e.target.closest('[data-drop-ship]');if(t){e.preventDefault();selected=Number(t.dataset.dropShip);selectedSlot=null;equip(e.dataTransfer.getData('text/plain'));}});
+$el('close-modal').onclick=()=>$el('modal').close();$el('modal').addEventListener('click',e=>{if(e.target===$el('modal')){const r=$el('modal').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)$el('modal').close();}});
+async function init(){
+ [routes,aliases,costs]=await Promise.all(['tts-routes','aliases','card-costs'].map(f=>fetch('data/'+f+'.json').then(r=>{if(!r.ok)throw Error('Cannot load '+f);return r.json();})));
+ const injector=angular.bootstrap(document.createElement('div'),['utopia']);sanitize=injector.get('$sanitize');clone=angular.copy;valueOf=injector.get('$filter')('valueOf');slots=injector.get('$filter')('upgradeSlots');
+ const rules=injector.get('cardRules');for(const [alias,canonical]of Object.entries(aliases))if(alias!==canonical&&rules[alias]&&!rules[canonical])rules[canonical]=rules[alias];
+ await new Promise(resolve=>injector.get('cardLoader')(cards,sets,{}, {},resolve));
+ const sourceTypes=new Map(costs.map(c=>[c.id,c.type]));for(const c of cards){c.catalogType=sourceTypes.get(c.id)||c.type;if(c.catalogType!==c.type)aliases[c.type+':'+c.id]=key(c);}
+ cards=cards.filter((c,i,arr)=>arr.findIndex(x=>key(x)===key(c))===i);catalogCards=cards.filter(c=>!RemodulatedRules.isInternalHelper(c));byKey=Object.fromEntries(cards.map(c=>[key(c),c]));
+ try{const stored=JSON.parse(localStorage.getItem('staw-remodulated-costs')||'null');if(stored){FleetCore.validateCosts(stored,byKey);if(stored.length===costs.length)costs=stored;}}catch{toast('Stored costs could not be read; using the bundled catalog.');}
+ applyCosts();engine={$watch(){},$on(){},cards,fleet,searchOptions:{types:{},columns:1}};injector.get('$controller')(injector.get('fleetBuilderDirective')[0].controller,{$scope:engine});
+ const types=[...new Set(cards.map(c=>c.type))].sort();$el('type').innerHTML='<option value="">All card types</option>'+types.map(t=>'<option value="'+esc(t)+'">'+nice(t)+'</option>').join('');$el('type').value='ship';
+ $el('faction').innerHTML+=[...new Set(cards.flatMap(c=>c.factions||[]))].sort().map(f=>'<option value="'+esc(f)+'">'+nice(f)+'</option>').join('');
+ $el('set').innerHTML+=Object.values(sets).sort((a,b)=>a.name.localeCompare(b.name)).map(s=>'<option value="'+esc(s.id)+'">'+esc(s.name)+'</option>').join('');
+ $el('catalog-stats').textContent=cards.length.toLocaleString()+' cards · '+Object.keys(routes).length.toLocaleString()+' verified TTS routes';
+ ready=true;const stored=localStorage.getItem('staw-remodulated-fleet');if(location.hash){try{loadText(location.href);}catch(e){toast(e.message);}}else if(stored){try{loadText(stored);}catch(e){toast('Saved fleet needs attention: '+e.message);}}
+ for(const id of ['faction','type','sort','set','tts-only','unique-only'])$el(id).onchange=()=>{page=0;renderCatalog();};$el('search').oninput=()=>{page=0;renderCatalog();};$el('prev').onclick=()=>{page--;renderCatalog();};$el('next').onclick=()=>{page++;renderCatalog();};
+ $el('point-mode').onchange=e=>changePointMode(e.target.value);$el('budget').oninput=()=>{renderFleet();persist();};$el('fleet-name').oninput=persist;
+ for(const v of ['spread','list'])$el(v).onclick=()=>{view=v;for(const x of ['spread','list']){$el(x).classList.toggle('active',v===x);$el(x).setAttribute('aria-pressed',String(v===x));}renderFleet();};
+ $el('export').onclick=exportDialog;$el('import').onclick=importDialog;$el('save').onclick=()=>download('remodulated-fleet.json',JSON.stringify(saveObject(),null,2));$el('cost-editor').onclick=costEditor;
+ $el('clear').onclick=()=>{if(!fleet.ships.length&&!fleet.resource)return;modal('<h2>Clear this fleet?</h2><p>You can save it first to keep a copy.</p><div class="dialog-actions"><button id="save-clear">Save a copy</button><button id="confirm-clear">Clear fleet</button></div>');$el('save-clear').onclick=()=>download('remodulated-fleet.json',JSON.stringify(saveObject(),null,2));$el('confirm-clear').onclick=()=>{fleet={ships:[]};selected=-1;selectedSlot=null;$el('modal').close();render();};};
+ window.STAW={get cards(){return cards;},get fleet(){return fleet;},get engine(){return engine;},get routes(){return routes;},get costs(){return costs;},equip,loadText,saveObject,changePointMode,render,exportFleet:mode=>FleetCore.ttsExport(fleet,routes,mode)};
+ render();
+}
+init().catch(e=>{$el('catalog').innerHTML='<p class="error-message">Unable to load the fleet builder: '+esc(e.message)+'. Start the site with npm start and open its localhost address.</p>';console.error(e);});

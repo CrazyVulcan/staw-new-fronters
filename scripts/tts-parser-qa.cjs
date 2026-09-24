@@ -1,0 +1,11 @@
+const fs=require('fs'),p=require('path'),assert=require('assert');
+const {lua,lauxlib,lualib,to_luastring,to_jsstring}=require(process.env.STAW_FENGARI||'fengari');
+const root=p.resolve(__dirname,'..'),core=require('../src/core.js'),catalog=JSON.parse(fs.readFileSync(p.join(root,'vendor/tts-catalog.json'))),routes=JSON.parse(fs.readFileSync(p.join(root,'public/data/tts-routes.json')));
+function quote(s){let eq='===';while(String(s).includes(']'+eq+']'))eq+='=';return '['+eq+'['+s+']'+eq+']';}
+function table(v){if(v===null||v===undefined)return 'nil';if(typeof v==='string')return quote(v);if(typeof v==='number'||typeof v==='boolean')return String(v);return '{'+Object.entries(v).map(([k,x])=>'[ '+(Array.isArray(v)?Number(k)+1:quote(k))+' ]='+table(x)).join(',')+'}';}
+const source=fs.readFileSync(p.join(root,'vendor/tts-importer-source.lua'),'utf8'),start=source.indexOf('local function canonicalFromDevelopment'),end=source.indexOf('function fleetPanel()',start),catalogTable={};
+for(const c of catalog.cards)catalogTable[c.id]={...c,...(catalog.assetSheets[c.assetSheet]||{})};
+const fixtures=Object.entries(routes).map(([k,r])=>{const card={id:r.id,type:r.type,name:r.name};const ship=r.type==='ship'?card:{id:'S274',type:'ship',name:'U.S.S. Enterprise-D',upgrades:[{occupant:card}]};return core.ttsExport({ships:[ship]},routes);});
+const code='CATALOG='+table(catalogTable)+'\nSHIP_DEFINITIONS={}\nlocal function array(t) return type(t)=="table" end\nlocal function join(t) return table.concat(t,", ") end\nlocal function decode(t) return nil end\n'+source.slice(start,end)+'\nlocal fixtures='+table(fixtures)+'\nfor i,text in ipairs(fixtures) do local fleet,err=parseFleet(text);assert(fleet,err);local result,err=reviewFleet(fleet);assert(result,err) end\nlocal hidden,hiddenError=parseFleet("S274\\nC114\\n#T001\\n");assert(hidden,hiddenError);assert(hidden.ships[1].cards[2].hidden==true,"# upgrade was not marked hidden")\nreturn #fixtures';
+const state=lauxlib.luaL_newstate();lualib.luaL_openlibs(state);let status=lauxlib.luaL_loadstring(state,to_luastring(code));if(status===lua.LUA_OK)status=lua.lua_pcall(state,0,1,0);assert.equal(status,lua.LUA_OK,status!==lua.LUA_OK?to_jsstring(lua.lua_tostring(state,-1)):'');
+console.log(lua.lua_tonumber(state,-1)+' routes accepted by the actual supplied TTS Lua parseFleet + reviewFleet functions.');
