@@ -3,7 +3,7 @@ const root=p.resolve(__dirname,'..');
 const read=file=>fs.readFileSync(p.join(root,file),'utf8');
 
 test('Root GitHub Pages entry point uses existing app with public asset paths',async()=>{
- const html=read('index.html'),css=read('style.css');
+ const html=read('index.html'),css=read('style.css'),utopia=read('public/vendor/utopia.js');
  for(const file of ['index.html','style.css','src/core.js','src/rules.js','src/app.js','public/css/font-staw.css','public/vendor/jquery.js','public/data/card-costs.json']){
   assert.ok(fs.existsSync(p.join(root,file)),file);
  }
@@ -11,6 +11,7 @@ test('Root GitHub Pages entry point uses existing app with public asset paths',a
  assert.match(html,/data-asset-path="data\/card-costs\.json"/);
  assert.match(html,/href="public\/css\/font-staw\.css"/);
  assert.match(html,/src="src\/app\.js"/);
+ assert.match(utopia,/remodulatedAssetPath\("data\/data\.json"\)/);
  assert.match(css,/url\('public\/fonts\/Swiss1\.ttf'\)/);
  assert.match(css,/url\('src\/favicon\.svg'\)/);
  const server=http.createServer((req,res)=>{
@@ -27,7 +28,7 @@ test('Root GitHub Pages entry point uses existing app with public asset paths',a
  const fetchStatus=path=>new Promise((resolve,reject)=>http.get({host:'127.0.0.1',port,path},res=>{res.resume();res.on('end',()=>resolve(res.statusCode));}).on('error',reject));
  try{
   assert.match(await fetchText('/'),/public\/css\/font-staw\.css/);
-  for(const path of ['/style.css','/src/app.js','/public/data/card-costs.json','/public/cards/ship-S415.webp']){
+  for(const path of ['/style.css','/src/app.js','/public/data/data.json','/public/data/card-costs.json','/public/cards/ship/ship-S415.webp']){
    assert.equal(await fetchStatus(path),200,path);
   }
  }finally{

@@ -10,13 +10,7 @@
 <footer><span id="catalog-stats">Star Trek Attack Wing Remodulated</span><div><a data-asset-path="data/card-costs.json" download>Editable card costs</a><a data-asset-path="data/id-audit.json" download>ID audit</a><a href="https://github.com/AngryTribble/Star-Trek-Attack-Wing-Utopia" target="_blank" rel="noreferrer">Utopia credits</a></div></footer>
 <dialog id="modal"><button id="close-modal" class="close" aria-label="Close dialog">×</button><div id="modal-content"></div></dialog><div id="toast" role="status" aria-live="polite"></div>
 <script>
-  const assetBaseFromScripts = () => {
-    const srcs = [...document.querySelectorAll('script[src]')].map(s => s.getAttribute('src') || '');
-    return srcs.some(src => /^public\//.test(src)) ? 'public' : '';
-  };
-  window.RemodulatedConfig = Object.assign({}, window.RemodulatedConfig || {}, {
-    assetBase: window.RemodulatedConfig?.assetBase || assetBaseFromScripts()
-  });
+  window.RemodulatedConfig={assetBase:'public'};
   window.remodulatedAssetPath = path => {
     const clean = String(path).replace(/^\/+/, '');
     const base = String(window.RemodulatedConfig?.assetBase || '').replace(/\/+$/, '');
