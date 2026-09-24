@@ -1,0 +1,1504 @@
+{
+  "sourceCommit": "478c9779ec901d2bae2a60d1aec625dcace0f148",
+  "cards": 2373,
+  "ttsRoutes": 2142,
+  "merges": [
+    {
+      "key": "ship:S199",
+      "name": "Federation Starship",
+      "reason": "Equivalent card; merged expansion membership"
+    },
+    {
+      "key": "question:Q036",
+      "name": "Systems Upgrade",
+      "reason": "Equivalent card; merged expansion membership"
+    },
+    {
+      "key": "tech:T311",
+      "name": "Navigational Deflector",
+      "reason": "Equivalent card; merged expansion membership"
+    },
+    {
+      "key": "tech:T309",
+      "name": "Enhanced Tractor Emitters",
+      "reason": "Equivalent card; merged expansion membership"
+    },
+    {
+      "key": "tech:T308",
+      "name": "Transporter Room",
+      "reason": "Equivalent card; merged expansion membership"
+    },
+    {
+      "key": "weapon:W250",
+      "name": "Mark VI Photon Torpedoes",
+      "reason": "Equivalent card; merged expansion membership"
+    },
+    {
+      "key": "talent:E196",
+      "name": "Legacy of the Name",
+      "reason": "Equivalent card; merged expansion membership"
+    }
+  ],
+  "mismatches": [],
+  "missing": [
+    {
+      "id": "S403",
+      "type": "ship",
+      "name": "Hirogen Starship",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "S199",
+      "type": "ship",
+      "name": "Federation Starship",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "S185",
+      "type": "ship",
+      "name": "Deep Space 9",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "S111",
+      "type": "ship",
+      "name": "Borg Starship",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "S141",
+      "type": "ship",
+      "name": "Borg Starship",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "S073",
+      "type": "ship",
+      "name": "Deep Space 9",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "Cap110",
+      "type": "captain",
+      "name": "Krenim",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0001",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0002",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0003",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0004",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0005",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0006",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0007",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0008",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0009",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0010",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0011",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0012",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0013",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0014",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0015",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0016",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0017",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0018",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0019",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0020",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0021",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0022",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0023",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AC0024",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "Q037",
+      "type": "question",
+      "name": "Kirk Admiral Slot",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "T312",
+      "type": "tech",
+      "name": "Tuesday (Tech)",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "W251",
+      "type": "weapon",
+      "name": "Tuesday (Weapon)",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "C483",
+      "type": "crew",
+      "name": "Tuesday (Crew)",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "B024",
+      "type": "borg",
+      "name": "Transwarp Coil",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "Q030",
+      "type": "question",
+      "name": "Voyager Discount",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "C426",
+      "type": "crew",
+      "name": "Lower Decks",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "W999",
+      "type": "weapon",
+      "name": "Type 10 Phasers (2nd Slot)",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "D027",
+      "type": "squadron",
+      "name": "Flanking Maneuver Delta",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "Q008",
+      "type": "question",
+      "name": "Borg Support Vehicle Token",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "W144",
+      "type": "weapon",
+      "name": "Photon Torpedoes",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "T117",
+      "type": "tech",
+      "name": "Subspace Vortex",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "W120",
+      "type": "weapon",
+      "name": "Photon Torpedoes",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "T207",
+      "type": "tech",
+      "name": "Impulse Overload",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "W063",
+      "type": "weapon",
+      "name": "Particle Beam Weapon",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "W059",
+      "type": "weapon",
+      "name": "Photon Torpedoes",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "E063",
+      "type": "talent",
+      "name": "Shinzon Romulan Talents",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "D006",
+      "type": "squadron",
+      "name": "Attack Wave",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "E035",
+      "type": "talent",
+      "name": "Balance of Terror",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "C035",
+      "type": "crew",
+      "name": "Balance of Terror",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "T044",
+      "type": "tech",
+      "name": "Balance of Terror",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "W027",
+      "type": "weapon",
+      "name": "Balance of Terror",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "T028",
+      "type": "tech",
+      "name": "Particle Synthesis",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "E028",
+      "type": "talent",
+      "name": "Neuro Toxin",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "W019",
+      "type": "weapon",
+      "name": "Pulse-Firing Particle Cannon",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "W015",
+      "type": "weapon",
+      "name": "Missile Launchers",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "C018",
+      "type": "crew",
+      "name": "Terry",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "T014",
+      "type": "tech",
+      "name": "High Energy Sensor Sweep",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "E013",
+      "type": "talent",
+      "name": "The Day is Ours!",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "W005",
+      "type": "weapon",
+      "name": "Concussive Charges",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "W009",
+      "type": "weapon",
+      "name": "Plasma Torpedoes",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP1004",
+      "type": "crew",
+      "name": "Science Officer",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2005",
+      "type": "crew",
+      "name": "Science Officer",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2006",
+      "type": "crew",
+      "name": "Helmsman",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2007",
+      "type": "crew",
+      "name": "Tactical Officer",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2009",
+      "type": "crew",
+      "name": "Operations Officer",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2010",
+      "type": "crew",
+      "name": "Weapons Officer",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP22011",
+      "type": "crew",
+      "name": "First Officer",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2012",
+      "type": "talent",
+      "name": "Reckless Assault",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2013",
+      "type": "talent",
+      "name": "Evasive Maneuvers",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2014",
+      "type": "talent",
+      "name": "Glory To The Empire!",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2016",
+      "type": "talent",
+      "name": "Fight With Honor",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2018",
+      "type": "talent",
+      "name": "Strafing Run",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2019",
+      "type": "talent",
+      "name": "Eye For An Eye",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2021",
+      "type": "weapon",
+      "name": "Forward Battery",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2022",
+      "type": "weapon",
+      "name": "Disruptor Overcharge",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2023",
+      "type": "weapon",
+      "name": "Photon Torpedoes",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2025",
+      "type": "weapon",
+      "name": "Torpedo Fusillade",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2026",
+      "type": "weapon",
+      "name": "Converging Fire",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2027",
+      "type": "tech",
+      "name": "Secondary Relays",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2028",
+      "type": "tech",
+      "name": "Reactor Vent",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2029",
+      "type": "tech",
+      "name": "Targeting Array",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2030",
+      "type": "tech",
+      "name": "Secondary Cloaking Coil",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2031",
+      "type": "tech",
+      "name": "Reinforced Hull",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2032",
+      "type": "tech",
+      "name": "Passive Sensors",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP2033",
+      "type": "tech",
+      "name": "Enhanced Thrusters",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3001",
+      "type": "crew",
+      "name": "Engineer",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3002",
+      "type": "talent",
+      "name": "Cunning",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3003",
+      "type": "weapon",
+      "name": "Disruptor Sweep",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3004",
+      "type": "tech",
+      "name": "Thruster Efficiency",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3006",
+      "type": "crew",
+      "name": "Helmsman",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3007",
+      "type": "crew",
+      "name": "Engineer",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3009",
+      "type": "crew",
+      "name": "Science Officer",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3010",
+      "type": "crew",
+      "name": "Sub-Commander",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3011",
+      "type": "crew",
+      "name": "Ops Officer",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3012",
+      "type": "talent",
+      "name": "Independent",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3013",
+      "type": "talent",
+      "name": "Anticipation",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3014",
+      "type": "crew",
+      "name": "Tactical Officer",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3015",
+      "type": "talent",
+      "name": "Suspicious",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3016",
+      "type": "talent",
+      "name": "Opportunistic",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3017",
+      "type": "talent",
+      "name": "Evasive",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3019",
+      "type": "talent",
+      "name": "Ambush Tactics",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3020",
+      "type": "weapon",
+      "name": "Heavy Disruptor",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3021",
+      "type": "weapon",
+      "name": "Heavy Plasma Torpedo",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3022",
+      "type": "weapon",
+      "name": "Ventral Disruptors",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3023",
+      "type": "weapon",
+      "name": "Integrated Cloak",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3024",
+      "type": "weapon",
+      "name": "Enhanced Torpedoes",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3025",
+      "type": "weapon",
+      "name": "Singularity Leak",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3026",
+      "type": "tech",
+      "name": "Ventral Thrusters",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3027",
+      "type": "tech",
+      "name": "Muon Feedback Beam",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3028",
+      "type": "tech",
+      "name": "Molecular Phase Inverter",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3029",
+      "type": "tech",
+      "name": "Advanced Cloaking",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3030",
+      "type": "tech",
+      "name": "Plasma Coil Overcharge",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AP3031",
+      "type": "tech",
+      "name": "Deep Cloak",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AE001",
+      "type": "talent",
+      "name": "Talent Slot",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AE002",
+      "type": "talent",
+      "name": "Talent Slot",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AE003",
+      "type": "talent",
+      "name": "Talent Slot",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AE004",
+      "type": "talent",
+      "name": "Talent Slots",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AE005",
+      "type": "talent",
+      "name": "Talent Slots",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AE006",
+      "type": "talent",
+      "name": "Talent Slots",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AE007",
+      "type": "talent",
+      "name": "Talent Slots",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AE008",
+      "type": "talent",
+      "name": "Talent Slots",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AE009",
+      "type": "talent",
+      "name": "Talent Slots",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AQ001",
+      "type": "question",
+      "name": "Upgrade Slots",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AQ002",
+      "type": "question",
+      "name": "Upgrade Slots",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AQ003",
+      "type": "question",
+      "name": "Upgrade Slots",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AQ004",
+      "type": "question",
+      "name": "Upgrade Slots",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AQ005",
+      "type": "question",
+      "name": "Upgrade Slots",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "AQ006",
+      "type": "question",
+      "name": "Upgrade Slots",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R001",
+      "type": "resource",
+      "name": "Elite Attack Die",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R002",
+      "type": "resource",
+      "name": "Command Tokens",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R003",
+      "type": "resource",
+      "name": "Reinforcements Sideboard",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R004",
+      "type": "resource",
+      "name": "Flagship",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R005",
+      "type": "resource",
+      "name": "Hideki Class Attack Fighters",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R006",
+      "type": "resource",
+      "name": "Federation Attack Fighters",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R007",
+      "type": "resource",
+      "name": "Skilled Helmsman",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R008",
+      "type": "resource",
+      "name": "Chief Engineer",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R009",
+      "type": "resource",
+      "name": "Counter Attack Die",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R010",
+      "type": "resource",
+      "name": "Fleet Captain",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R011",
+      "type": "resource",
+      "name": "Officer Cards",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R012",
+      "type": "resource",
+      "name": "Improved Shields",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R013",
+      "type": "resource",
+      "name": "Advanced Targeting Systems",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R014",
+      "type": "resource",
+      "name": "High Yield Photon Torpedoes",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R015",
+      "type": "resource",
+      "name": "Officer Exchange Program",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R016",
+      "type": "resource",
+      "name": "Evasive Action Template",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R017",
+      "type": "resource",
+      "name": "Master Strategist Tokens (MST)",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R018",
+      "type": "resource",
+      "name": "Damage Control Team",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R019",
+      "type": "resource",
+      "name": "Ready Room",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R020",
+      "type": "resource",
+      "name": "Emergency Force Field",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R021",
+      "type": "resource",
+      "name": "Sabotage",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R022",
+      "type": "resource",
+      "name": "Protocol",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R023",
+      "type": "resource",
+      "name": "Advanced Technology",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R024",
+      "type": "resource",
+      "name": "Main Power Grid",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R025",
+      "type": "resource",
+      "name": "TACTICS",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R026",
+      "type": "resource",
+      "name": "Structural Damage Check",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R027",
+      "type": "resource",
+      "name": "General Orders",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R028",
+      "type": "resource",
+      "name": "Emergency Power",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R029",
+      "type": "resource",
+      "name": "Improved Hull",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R030",
+      "type": "resource",
+      "name": "Intercepted Messages",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R031",
+      "type": "resource",
+      "name": "Condition Alert",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R032",
+      "type": "resource",
+      "name": "Scan Cycle",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R033",
+      "type": "resource",
+      "name": "Fleet Commander",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R034",
+      "type": "resource",
+      "name": "Auxiliary Power",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R035",
+      "type": "resource",
+      "name": "All Stop",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R036",
+      "type": "resource",
+      "name": "Senior Staff",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R037",
+      "type": "resource",
+      "name": "Mutiny",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R038",
+      "type": "resource",
+      "name": "Co Pilot",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R039",
+      "type": "resource",
+      "name": "Captain's Chair",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R040",
+      "type": "resource",
+      "name": "Front Line Retrofit",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R041",
+      "type": "resource",
+      "name": "Long-Range Probe",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R042",
+      "type": "resource",
+      "name": "Sick Bay",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "rule_starshipconstruction",
+      "type": "token",
+      "name": "Starship Construction",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "rule_love_crysatal",
+      "type": "token",
+      "name": "Love Crystal Token",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "rule_borg_tractor_beam",
+      "type": "token",
+      "name": "Borg Tractor Beam Token (BTBT)",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "rule_specialzation",
+      "type": "token",
+      "name": "Specialization Cards (SCS)",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "rule_BMGT",
+      "type": "token",
+      "name": "Bio-Mimetic Gel Rules",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "rule_GPLT",
+      "type": "token",
+      "name": "Gold-Pressed Latinum Token",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "rule_EWT",
+      "type": "token",
+      "name": "Energy Web Token",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "rule_ambassador",
+      "type": "token",
+      "name": "Ambassador Cards",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "rule_muon_token",
+      "type": "token",
+      "name": "Muon Token",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "rule_regenerate",
+      "type": "token",
+      "name": "Regenerate",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "grapple_tokens",
+      "type": "token",
+      "name": "Grapple Token",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "tribble_tokens",
+      "type": "token",
+      "name": "Tribble Tokens",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "Multi-Vactor_Assault_Mode_tokens",
+      "type": "token",
+      "name": "Multi-Vector Assault Mode Token",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "adaptation_tokens",
+      "type": "token",
+      "name": "Adaptation Tokens",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "Escape_Pod_Token",
+      "type": "token",
+      "name": "Escape Pod Token (EPT)",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "Ablative_Generator_Token",
+      "type": "token",
+      "name": "Ablative Generator Token (AGT)",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "engery_dampening_tokens",
+      "type": "token",
+      "name": "Energy Dampening Tokens (EDT)",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "rule_drone_tokens",
+      "type": "token",
+      "name": "Drone Tokens",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R010a",
+      "type": "fleet-captain",
+      "name": "Federation",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R010b",
+      "type": "fleet-captain",
+      "name": "Dominion",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R010c",
+      "type": "fleet-captain",
+      "name": "Romulan",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R010d",
+      "type": "fleet-captain",
+      "name": "Klingon",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R010e",
+      "type": "fleet-captain",
+      "name": "Independent (Klingon)",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R010f",
+      "type": "fleet-captain",
+      "name": "Independent (Federation)",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R010g",
+      "type": "fleet-captain",
+      "name": "Independent (Romulan)",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R010h",
+      "type": "fleet-captain",
+      "name": "Independent (Dominion)",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R011a",
+      "type": "officer",
+      "name": "First Officer",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R011b",
+      "type": "officer",
+      "name": "Tactical Officer",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R011c",
+      "type": "officer",
+      "name": "Operations Officer",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R011d",
+      "type": "officer",
+      "name": "Science Officer",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R004a",
+      "type": "flagship",
+      "name": "Romulan",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R004f",
+      "type": "flagship",
+      "name": "Independent (Romulan)",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R004b",
+      "type": "flagship",
+      "name": "Klingon",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R004g",
+      "type": "flagship",
+      "name": "Independent (Klingon)",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R004c",
+      "type": "flagship",
+      "name": "Dominion",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R004h",
+      "type": "flagship",
+      "name": "Independent (Dominion)",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R004e",
+      "type": "flagship",
+      "name": "Federation",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R004i",
+      "type": "flagship",
+      "name": "Independent (Federation)",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "faction_federation",
+      "type": "faction",
+      "name": "Federation",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "faction_klingon",
+      "type": "faction",
+      "name": "Klingon",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "faction_romulan",
+      "type": "faction",
+      "name": "Romulan",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "faction_dominion",
+      "type": "faction",
+      "name": "Dominion",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "faction_borg",
+      "type": "faction",
+      "name": "Borg",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "faction_species_8472",
+      "type": "faction",
+      "name": "Species 8472",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "faction_kazon",
+      "type": "faction",
+      "name": "Kazon",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "faction_xindi",
+      "type": "faction",
+      "name": "Xindi",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "faction_bajoran",
+      "type": "faction",
+      "name": "Bajoran",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "faction_ferengi",
+      "type": "faction",
+      "name": "Ferengi",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "faction_vulcan",
+      "type": "faction",
+      "name": "Vulcan",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "faction_independent",
+      "type": "faction",
+      "name": "Independent",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "faction_mirror_universe",
+      "type": "faction",
+      "name": "Mirror Universe",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "faction_q_continuum",
+      "type": "faction",
+      "name": "Q Continuum",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "Rs01",
+      "type": "ship-resource",
+      "name": "Movars Ability ",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R036a",
+      "type": "ship-resource",
+      "name": "Senior Staff ",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R033b",
+      "type": "ship-resource",
+      "name": "Fleet Commander",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R033a",
+      "type": "ship-resource",
+      "name": "Fleet Commander",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R039a",
+      "type": "ship-resource",
+      "name": "Captain's Chair",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "Rs40",
+      "type": "ship-resource",
+      "name": "Front Line Retrofit",
+      "reason": "No card in supplied TTS catalog"
+    },
+    {
+      "id": "R042a",
+      "type": "ship-resource",
+      "name": "Sickbay",
+      "reason": "No card in supplied TTS catalog"
+    }
+  ],
+  "corrections": [
+    {
+      "from": "token:rule_specialzation",
+      "to": "token:rule_borg_tractor_beam",
+      "name": "Borg Tractor Beam Token (BTBT)",
+      "reason": "Upstream assigns the same ID to two different reference cards; the specialization reference keeps its existing ID."
+    },
+    {
+      "ids": [
+        "T053",
+        "T057"
+      ],
+      "reason": "Keep original tech catalog identities even when Utopia evaluates multi-slot question-card rules."
+    }
+  ],
+  "aliases": [
+    [
+      "question:Q036a",
+      "question:Q036"
+    ],
+    [
+      "question:Q036,Q036a",
+      "question:Q036"
+    ],
+    [
+      "tech:T311a",
+      "tech:T311"
+    ],
+    [
+      "tech:T311,T311a",
+      "tech:T311"
+    ],
+    [
+      "tech:T309a",
+      "tech:T309"
+    ],
+    [
+      "tech:T309,T309a",
+      "tech:T309"
+    ],
+    [
+      "tech:T308a",
+      "tech:T308"
+    ],
+    [
+      "tech:T308,T308a",
+      "tech:T308"
+    ],
+    [
+      "weapon:W250a",
+      "weapon:W250"
+    ],
+    [
+      "weapon:W250,W250a",
+      "weapon:W250"
+    ],
+    [
+      "talent:E196a",
+      "talent:E196"
+    ],
+    [
+      "talent:E196a,E196",
+      "talent:E196"
+    ],
+    [
+      "question:T053",
+      "tech:T053"
+    ],
+    [
+      "question:T057",
+      "tech:T057"
+    ]
+  ]
+}
