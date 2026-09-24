@@ -1,0 +1,153 @@
+{
+  "source": "vendor/utopia/js/common/utopia-card-rules.js",
+  "meaning": "Generated upgrade slots that Utopia marks faceDown. Occupants export to TTS with a # prefix.",
+  "cardCount": 18,
+  "hiddenSlotCount": 19,
+  "cards": [
+    {
+      "cardKey": "captain:Cap219",
+      "name": "AKOREM LAAN",
+      "hiddenSlots": 1,
+      "sourceLines": [
+        6265
+      ]
+    },
+    {
+      "cardKey": "captain:Cap446",
+      "name": "Daimon Solok",
+      "hiddenSlots": 2,
+      "sourceLines": [
+        7995,
+        8009
+      ]
+    },
+    {
+      "cardKey": "captain:Cap524",
+      "name": "Tahna Los",
+      "hiddenSlots": 1,
+      "sourceLines": [
+        2984
+      ]
+    },
+    {
+      "cardKey": "captain:Cap656",
+      "name": "Duras",
+      "hiddenSlots": 1,
+      "sourceLines": [
+        7706
+      ]
+    },
+    {
+      "cardKey": "captain:Cap905",
+      "name": "James T. Kirk",
+      "hiddenSlots": 1,
+      "sourceLines": [
+        2681
+      ]
+    },
+    {
+      "cardKey": "crew:C035",
+      "name": "Balance of Terror",
+      "hiddenSlots": 1,
+      "sourceLines": [
+        10144
+      ]
+    },
+    {
+      "cardKey": "crew:C114",
+      "name": "Quark",
+      "hiddenSlots": 1,
+      "sourceLines": [
+        3471
+      ]
+    },
+    {
+      "cardKey": "crew:C217",
+      "name": "Wesley Crusher",
+      "hiddenSlots": 1,
+      "sourceLines": [
+        5870
+      ]
+    },
+    {
+      "cardKey": "crew:C330",
+      "name": "Leonard Mccoy",
+      "hiddenSlots": 1,
+      "sourceLines": [
+        8541
+      ]
+    },
+    {
+      "cardKey": "crew:C369",
+      "name": "T'Paal",
+      "hiddenSlots": 1,
+      "sourceLines": [
+        8981
+      ]
+    },
+    {
+      "cardKey": "talent:E035",
+      "name": "Balance of Terror",
+      "hiddenSlots": 1,
+      "sourceLines": [
+        10117
+      ]
+    },
+    {
+      "cardKey": "talent:E063",
+      "name": "Shinzon Romulan Talents",
+      "hiddenSlots": 1,
+      "sourceLines": [
+        4052
+      ]
+    },
+    {
+      "cardKey": "talent:E172",
+      "name": "DNA Encoded Message",
+      "hiddenSlots": 1,
+      "sourceLines": [
+        7523
+      ]
+    },
+    {
+      "cardKey": "tech:T001",
+      "name": "Cryogenic Stasis",
+      "hiddenSlots": 1,
+      "sourceLines": [
+        5420
+      ]
+    },
+    {
+      "cardKey": "tech:T044",
+      "name": "Balance of Terror",
+      "hiddenSlots": 1,
+      "sourceLines": [
+        10171
+      ]
+    },
+    {
+      "cardKey": "tech:T180",
+      "name": "Integrated Future Technology",
+      "hiddenSlots": 1,
+      "sourceLines": [
+        8623
+      ]
+    },
+    {
+      "cardKey": "weapon:W027",
+      "name": "Balance of Terror",
+      "hiddenSlots": 1,
+      "sourceLines": [
+        10198
+      ]
+    },
+    {
+      "cardKey": "weapon:W215",
+      "name": "Experimental Torpedo Bay",
+      "hiddenSlots": 1,
+      "sourceLines": [
+        2184
+      ]
+    }
+  ]
+}
