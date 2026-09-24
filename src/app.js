@@ -3,7 +3,7 @@ const $el=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/
 const nice=s=>String(s).replace(/[-_]/g,' ').replace(/\b\w/g,c=>c.toUpperCase()),key=FleetCore.key;
 const runtimeConfig=typeof window==='object'&&window.RemodulatedConfig?window.RemodulatedConfig:{};
 const assetBase=String(runtimeConfig.assetBase||'').replace(/\/+$/,'');
-const assetPath=path=>(assetBase?assetBase+'/':'')+String(path).replace(/^\/+/,'');
+const assetPath=path=>{const clean=String(path).replace(/^\/+/,'');return (assetBase?assetBase+'/':'')+(assetBase&&clean.startsWith(assetBase+'/')?clean.slice(assetBase.length+1):clean);};
 const assetUrl=path=>/^(?:[a-z]+:)?\/\//i.test(String(path))||String(path).startsWith('data:')?String(path):assetPath(path);
 let cards=[],catalogCards=[],byKey={},sets={},routes={},aliases={},costs=[],engine,valueOf,slots,clone,sanitize,pointMode='standard';
 let fleet={ships:[]},selected=-1,page=0,pageSize=12,view='spread',selectedSlot=null,ready=false,lastToast=0,importing=false;
