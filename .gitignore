@@ -1,0 +1,5 @@
+node_modules/
+.asset-cache/
+dist/
+preview-*.png
+test-results/
