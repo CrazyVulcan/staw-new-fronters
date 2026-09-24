@@ -15,7 +15,10 @@ test('Array IDs and duplicates have unambiguous aliases',()=>{
 test('Every TTS route matches its original catalog identity and a local image',()=>{
  const catalog=read('vendor/tts-catalog.json');const original=new Map(catalog.cards.map(c=>[c.id,c]));
  assert.equal(Object.keys(routes).length,2142);
- for(const [k,r]of Object.entries(routes)){assert.equal(r.id,by[k].id);assert.equal(r.type,by[k].type);assert.equal(r.name,original.get(r.id).name);assert.ok(r.index>=0&&r.index<r.width*r.height);assert.ok(fs.existsSync(p.join(root,'public',r.localImage)),k);}
+ for(const [k,r]of Object.entries(routes)){assert.equal(r.id,by[k].id);assert.equal(r.type,by[k].type);assert.equal(r.name,original.get(r.id).name);assert.ok(r.index>=0&&r.index<r.width*r.height);assert.match(r.localImage,new RegExp('^cards/'+r.type+'/'));assert.ok(fs.existsSync(p.join(root,'public',r.localImage)),k);}
+ const folders=fs.readdirSync(p.join(root,'public/cards'),{withFileTypes:true});
+ assert.ok(folders.every(entry=>entry.isDirectory()));
+ for(const folder of folders)assert.ok(fs.readdirSync(p.join(root,'public/cards',folder.name)).length<1000,folder.name);
 });
 test('Saved fleets normalize legacy aliases without dropping unknown IDs',()=>{
  const saved={ships:[{id:'ship:S274',upgrades:[{id:'tech:T311a'}]}]};

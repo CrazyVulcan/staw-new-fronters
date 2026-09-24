@@ -19,9 +19,10 @@ async function hash(f){const h=crypto.createHash('sha1');for await(const c of fs
    for(const [key,route]of entries){
     const left=Math.round((route.index%route.width)*meta.width/route.width),top=Math.round(Math.floor(route.index/route.width)*meta.height/route.height);
     const right=Math.round(((route.index%route.width)+1)*meta.width/route.width),bottom=Math.round((Math.floor(route.index/route.width)+1)*meta.height/route.height);
-    const name=key.replace(':','-')+'.webp';
-    await sharp(file).extract({left,top,width:right-left,height:bottom-top}).resize({width:500,withoutEnlargement:true}).webp({quality:86}).toFile(p.join(root,'public/cards',name));
-    route.localImage='cards/'+name;route.aspect=(right-left)/(bottom-top);
+    const type=route.type,name=key.replace(':','-')+'.webp',typeDir=p.join(root,'public/cards',type);
+    fs.mkdirSync(typeDir,{recursive:true});
+    await sharp(file).extract({left,top,width:right-left,height:bottom-top}).resize({width:500,withoutEnlargement:true}).webp({quality:86}).toFile(p.join(typeDir,name));
+    route.localImage='cards/'+type+'/'+name;route.aspect=(right-left)/(bottom-top);
    }
    console.log('Images',++done,'/',byFace.size,entries.length,'cards');
   }catch(e){failures.push({url,error:e.message});console.log('Failed:',e.message);}
