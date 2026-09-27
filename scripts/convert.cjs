@@ -5,10 +5,13 @@ const write=(f,v)=>{fs.mkdirSync(p.dirname(p.join(root,f)),{recursive:true});fs.
 const groups=['ships','captains','admirals','ambassadors','upgrades','starship_construction','resources','others'];
 const data={sets:require(p.join(source,'sets.js')),shipClasses:require(p.join(source,'ship_classes.js'))};
 const tts=read('vendor/tts-catalog.json'),ttsBy=new Map(tts.cards.map(c=>[c.id,c]));
-const cards=[],aliases={},merges=[],conflicts=[],keys=new Map();
+const cards=[],aliases={},merges=[],conflicts=[],suppressedAlliance=[],keys=new Map();
 for(const group of groups){data[group]=[];for(const raw of require(p.join(source,group+'.js'))){
   if(raw.type==='copy'){data[group].push(raw);continue;}
   const ids=(Array.isArray(raw.id)?raw.id:[raw.id]).map(String);
+  // Alliance-only duplicates are useful in the Alliance app, but cannot be
+  // spawned by this mod. Keep Alliance cards that have an actual TTS route.
+  if(raw.alliance===true&&!ids.some(id=>ttsBy.has(id))){suppressedAlliance.push({id:raw.id,type:raw.type,name:raw.name,reason:'Alliance-only record has no card in the supplied TTS catalog'});continue;}
   const canonical=raw.name==='Borg Tractor Beam Token (BTBT)'?'rule_borg_tractor_beam':ids.map(id=>ttsBy.get(id)?.canonicalCardId).find(Boolean)||ids.find(id=>!/[a-z]$/.test(id))||ids[0];
   const card=JSON.parse(JSON.stringify({...raw,id:canonical}));
   const key=card.type+':'+canonical;
@@ -40,6 +43,9 @@ for(const c of cards){
   routes[key]={id:t.id,type:t.type,name:t.name,face,back,width,height,index,ttsCardId:t.sheet?.ttsCardId||null,assetSheet:t.assetSheet||null};
   const old=previousRoutes[key];if(old?.localImage&&old.face===face&&old.width===width&&old.height===height&&old.index===index){routes[key].localImage=old.localImage;routes[key].aspect=old.aspect;}
 }
+// The source sheet maps Cap039 to a Mr. Spock scan. Render the correct Archer
+// rules with verified Archer artwork instead of showing the wrong character.
+if(routes['captain:Cap039'])Object.assign(routes['captain:Cap039'],{displayFallback:true,artImage:'cards/art/captain-Cap039.png'});
 // Name disagreements are never silently exported. Keep evidence for human review.
 const costsPath=p.join(root,'public/data/card-costs.json');
 const previous=fs.existsSync(costsPath)?new Map(read('public/data/card-costs.json').map(c=>[c.type+':'+c.id,c])):new Map();
@@ -47,5 +53,5 @@ const costs=cards.map(c=>({id:c.id,name:c.name,type:c.type,cost:previous.has(c.t
 aliases['question:T053']='tech:T053';aliases['question:T057']='tech:T057';
 write('public/data/data.json',data);write('public/data/aliases.json',aliases);write('public/data/tts-routes.json',routes);write('public/data/card-costs.json',costs);
 write('public/data/reference-data.json',{rulings:require(p.join(source,'rulings.js')),missionSets:require(p.join(source,'missionSets.js')),missions:require(p.join(source,'missions.js'))});
-write('public/data/id-audit.json',{sourceCommit:'478c9779ec901d2bae2a60d1aec625dcace0f148',cards:cards.length,ttsRoutes:Object.keys(routes).length,merges,mismatches,missing,corrections:[{from:'token:rule_specialzation',to:'token:rule_borg_tractor_beam',name:'Borg Tractor Beam Token (BTBT)',reason:'Upstream assigns the same ID to two different reference cards; the specialization reference keeps its existing ID.'},{ids:['T053','T057'],reason:'Keep original tech catalog identities even when Utopia evaluates multi-slot question-card rules.'}],aliases:Object.entries(aliases).filter(([a,b])=>a!==b)});
-console.log(JSON.stringify({cards:cards.length,routes:Object.keys(routes).length,merges:merges.length,mismatches: mismatches.length,missing:missing.length}));
+write('public/data/id-audit.json',{sourceCommit:'478c9779ec901d2bae2a60d1aec625dcace0f148',cards:cards.length,ttsRoutes:Object.keys(routes).length,merges,mismatches,missing,suppressedAlliance,corrections:[{from:'token:rule_specialzation',to:'token:rule_borg_tractor_beam',name:'Borg Tractor Beam Token (BTBT)',reason:'Upstream assigns the same ID to two different reference cards; the specialization reference keeps its existing ID.'},{ids:['T053','T057'],reason:'Keep original tech catalog identities even when Utopia evaluates multi-slot question-card rules.'},{id:'Cap039',name:'Jonathan Archer',reason:'The supplied TTS sheet cell contains Mr. Spock; the builder uses the correct Archer artwork with converted rules text.'}],aliases:Object.entries(aliases).filter(([a,b])=>a!==b)});
+console.log(JSON.stringify({cards:cards.length,routes:Object.keys(routes).length,merges:merges.length,mismatches:mismatches.length,missing:missing.length,suppressedAlliance:suppressedAlliance.length}));

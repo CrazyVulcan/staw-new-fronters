@@ -1,6 +1,6 @@
 {
   "sourceCommit": "478c9779ec901d2bae2a60d1aec625dcace0f148",
-  "cards": 2373,
+  "cards": 2296,
   "ttsRoutes": 2142,
   "merges": [
     {
@@ -81,150 +81,6 @@
       "id": "Cap110",
       "type": "captain",
       "name": "Krenim",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0001",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0002",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0003",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0004",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0005",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0006",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0007",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0008",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0009",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0010",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0011",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0012",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0013",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0014",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0015",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0016",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0017",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0018",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0019",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0020",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0021",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0022",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0023",
-      "type": "captain",
-      "name": "Player Captain",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AC0024",
-      "type": "captain",
-      "name": "Player Captain",
       "reason": "No card in supplied TTS catalog"
     },
     {
@@ -411,324 +267,6 @@
       "id": "W009",
       "type": "weapon",
       "name": "Plasma Torpedoes",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP1004",
-      "type": "crew",
-      "name": "Science Officer",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2005",
-      "type": "crew",
-      "name": "Science Officer",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2006",
-      "type": "crew",
-      "name": "Helmsman",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2007",
-      "type": "crew",
-      "name": "Tactical Officer",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2009",
-      "type": "crew",
-      "name": "Operations Officer",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2010",
-      "type": "crew",
-      "name": "Weapons Officer",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP22011",
-      "type": "crew",
-      "name": "First Officer",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2012",
-      "type": "talent",
-      "name": "Reckless Assault",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2013",
-      "type": "talent",
-      "name": "Evasive Maneuvers",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2014",
-      "type": "talent",
-      "name": "Glory To The Empire!",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2016",
-      "type": "talent",
-      "name": "Fight With Honor",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2018",
-      "type": "talent",
-      "name": "Strafing Run",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2019",
-      "type": "talent",
-      "name": "Eye For An Eye",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2021",
-      "type": "weapon",
-      "name": "Forward Battery",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2022",
-      "type": "weapon",
-      "name": "Disruptor Overcharge",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2023",
-      "type": "weapon",
-      "name": "Photon Torpedoes",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2025",
-      "type": "weapon",
-      "name": "Torpedo Fusillade",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2026",
-      "type": "weapon",
-      "name": "Converging Fire",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2027",
-      "type": "tech",
-      "name": "Secondary Relays",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2028",
-      "type": "tech",
-      "name": "Reactor Vent",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2029",
-      "type": "tech",
-      "name": "Targeting Array",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2030",
-      "type": "tech",
-      "name": "Secondary Cloaking Coil",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2031",
-      "type": "tech",
-      "name": "Reinforced Hull",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2032",
-      "type": "tech",
-      "name": "Passive Sensors",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP2033",
-      "type": "tech",
-      "name": "Enhanced Thrusters",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3001",
-      "type": "crew",
-      "name": "Engineer",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3002",
-      "type": "talent",
-      "name": "Cunning",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3003",
-      "type": "weapon",
-      "name": "Disruptor Sweep",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3004",
-      "type": "tech",
-      "name": "Thruster Efficiency",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3006",
-      "type": "crew",
-      "name": "Helmsman",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3007",
-      "type": "crew",
-      "name": "Engineer",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3009",
-      "type": "crew",
-      "name": "Science Officer",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3010",
-      "type": "crew",
-      "name": "Sub-Commander",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3011",
-      "type": "crew",
-      "name": "Ops Officer",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3012",
-      "type": "talent",
-      "name": "Independent",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3013",
-      "type": "talent",
-      "name": "Anticipation",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3014",
-      "type": "crew",
-      "name": "Tactical Officer",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3015",
-      "type": "talent",
-      "name": "Suspicious",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3016",
-      "type": "talent",
-      "name": "Opportunistic",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3017",
-      "type": "talent",
-      "name": "Evasive",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3019",
-      "type": "talent",
-      "name": "Ambush Tactics",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3020",
-      "type": "weapon",
-      "name": "Heavy Disruptor",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3021",
-      "type": "weapon",
-      "name": "Heavy Plasma Torpedo",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3022",
-      "type": "weapon",
-      "name": "Ventral Disruptors",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3023",
-      "type": "weapon",
-      "name": "Integrated Cloak",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3024",
-      "type": "weapon",
-      "name": "Enhanced Torpedoes",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3025",
-      "type": "weapon",
-      "name": "Singularity Leak",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3026",
-      "type": "tech",
-      "name": "Ventral Thrusters",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3027",
-      "type": "tech",
-      "name": "Muon Feedback Beam",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3028",
-      "type": "tech",
-      "name": "Molecular Phase Inverter",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3029",
-      "type": "tech",
-      "name": "Advanced Cloaking",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3030",
-      "type": "tech",
-      "name": "Plasma Coil Overcharge",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "AP3031",
-      "type": "tech",
-      "name": "Deep Cloak",
       "reason": "No card in supplied TTS catalog"
     },
     {
@@ -1428,6 +966,470 @@
       "reason": "No card in supplied TTS catalog"
     }
   ],
+  "suppressedAlliance": [
+    {
+      "id": "AC0001",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0002",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0003",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0004",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0005",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0006",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0007",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0008",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0009",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0010",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0011",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0012",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0013",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0014",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0015",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0016",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0017",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0018",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0019",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0020",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0021",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0022",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0023",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AC0024",
+      "type": "captain",
+      "name": "Player Captain",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP1004",
+      "type": "crew",
+      "name": "Science Officer",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2005",
+      "type": "crew",
+      "name": "Science Officer",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2006",
+      "type": "crew",
+      "name": "Helmsman",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2007",
+      "type": "crew",
+      "name": "Tactical Officer",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2009",
+      "type": "crew",
+      "name": "Operations Officer",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2010",
+      "type": "crew",
+      "name": "Weapons Officer",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP22011",
+      "type": "crew",
+      "name": "First Officer",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2012",
+      "type": "talent",
+      "name": "Reckless Assault",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2013",
+      "type": "talent",
+      "name": "Evasive Maneuvers",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2014",
+      "type": "talent",
+      "name": "Glory To The Empire!",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2016",
+      "type": "talent",
+      "name": "Fight With Honor",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2018",
+      "type": "talent",
+      "name": "Strafing Run",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2019",
+      "type": "talent",
+      "name": "Eye For An Eye",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2021",
+      "type": "weapon",
+      "name": "Forward Battery",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2022",
+      "type": "weapon",
+      "name": "Disruptor Overcharge",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2023",
+      "type": "weapon",
+      "name": "Photon Torpedoes",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2025",
+      "type": "weapon",
+      "name": "Torpedo Fusillade",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2026",
+      "type": "weapon",
+      "name": "Converging Fire",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2027",
+      "type": "tech",
+      "name": "Secondary Relays",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2028",
+      "type": "tech",
+      "name": "Reactor Vent",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2029",
+      "type": "tech",
+      "name": "Targeting Array",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2030",
+      "type": "tech",
+      "name": "Secondary Cloaking Coil",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2031",
+      "type": "tech",
+      "name": "Reinforced Hull",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2032",
+      "type": "tech",
+      "name": "Passive Sensors",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP2033",
+      "type": "tech",
+      "name": "Enhanced Thrusters",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3001",
+      "type": "crew",
+      "name": "Engineer",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3002",
+      "type": "talent",
+      "name": "Cunning",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3003",
+      "type": "weapon",
+      "name": "Disruptor Sweep",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3004",
+      "type": "tech",
+      "name": "Thruster Efficiency",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3006",
+      "type": "crew",
+      "name": "Helmsman",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3007",
+      "type": "crew",
+      "name": "Engineer",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3009",
+      "type": "crew",
+      "name": "Science Officer",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3010",
+      "type": "crew",
+      "name": "Sub-Commander",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3011",
+      "type": "crew",
+      "name": "Ops Officer",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3012",
+      "type": "talent",
+      "name": "Independent",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3013",
+      "type": "talent",
+      "name": "Anticipation",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3014",
+      "type": "crew",
+      "name": "Tactical Officer",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3015",
+      "type": "talent",
+      "name": "Suspicious",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3016",
+      "type": "talent",
+      "name": "Opportunistic",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3017",
+      "type": "talent",
+      "name": "Evasive",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3019",
+      "type": "talent",
+      "name": "Ambush Tactics",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3020",
+      "type": "weapon",
+      "name": "Heavy Disruptor",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3021",
+      "type": "weapon",
+      "name": "Heavy Plasma Torpedo",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3022",
+      "type": "weapon",
+      "name": "Ventral Disruptors",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3023",
+      "type": "weapon",
+      "name": "Integrated Cloak",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3024",
+      "type": "weapon",
+      "name": "Enhanced Torpedoes",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3025",
+      "type": "weapon",
+      "name": "Singularity Leak",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3026",
+      "type": "tech",
+      "name": "Ventral Thrusters",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3027",
+      "type": "tech",
+      "name": "Muon Feedback Beam",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3028",
+      "type": "tech",
+      "name": "Molecular Phase Inverter",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3029",
+      "type": "tech",
+      "name": "Advanced Cloaking",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3030",
+      "type": "tech",
+      "name": "Plasma Coil Overcharge",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    },
+    {
+      "id": "AP3031",
+      "type": "tech",
+      "name": "Deep Cloak",
+      "reason": "Alliance-only record has no card in the supplied TTS catalog"
+    }
+  ],
   "corrections": [
     {
       "from": "token:rule_specialzation",
@@ -1441,6 +1443,11 @@
         "T057"
       ],
       "reason": "Keep original tech catalog identities even when Utopia evaluates multi-slot question-card rules."
+    },
+    {
+      "id": "Cap039",
+      "name": "Jonathan Archer",
+      "reason": "The supplied TTS sheet cell contains Mr. Spock; the builder uses the correct Archer artwork with converted rules text."
     }
   ],
   "aliases": [

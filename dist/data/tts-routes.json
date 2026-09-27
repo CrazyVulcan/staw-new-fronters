@@ -5667,7 +5667,9 @@
     "ttsCardId": 942049,
     "assetSheet": "s14",
     "localImage": "cards/captain/captain-Cap039.webp",
-    "aspect": 0.7142857142857143
+    "aspect": 0.7142857142857143,
+    "displayFallback": true,
+    "artImage": "cards/art/captain-Cap039.png"
   },
   "captain:Cap037": {
     "id": "Cap037",

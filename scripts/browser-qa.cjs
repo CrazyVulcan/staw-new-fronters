@@ -5,7 +5,12 @@ const {chromium}=require(process.env.STAW_NODE_MODULES?p.join(process.env.STAW_N
  const browser=await chromium.launch({channel:'msedge',headless:true}),page=await browser.newPage({viewport:{width:1440,height:1000}});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
  await page.goto('http://127.0.0.1:4173');await page.waitForFunction(()=>!!window.STAW);
- assert.equal(await page.evaluate(()=>STAW.cards.length),2373);
+ assert.equal(await page.evaluate(()=>STAW.cards.length),2296);
+ assert.equal(await page.locator('#cost-editor').count(),0);
+ await page.selectOption('#type','captain');await page.locator('#search').fill('Cap039');
+ assert.equal(await page.locator('.catalog-entry').count(),1);
+ assert.match(await page.locator('.fallback-art').getAttribute('src'),/cards\/art\/captain-Cap039\.png$/);
+ await page.selectOption('#type','ship');
  await page.locator('#search').fill('S274');assert.equal(await page.locator('.catalog-entry').count(),1);
  await page.locator('[data-add="ship:S274"]').click();assert.equal(await page.locator('#total').textContent(),'26');
  await page.locator('[data-choose="captain"]').click();await page.locator('#search').fill('Cap049');await page.locator('[data-add="captain:Cap049"]').click();
@@ -18,9 +23,8 @@ const {chromium}=require(process.env.STAW_NODE_MODULES?p.join(process.env.STAW_N
  await page.locator('#export-json').click();const exp=JSON.parse(await page.locator('#export-text').inputValue());assert.equal(exp.schemaVersion,2);assert.equal(exp.ships[0].cards[1].cardId,'C441');await page.locator('#close-modal').click();
  await page.evaluate(()=>STAW.loadText(JSON.stringify(STAW.saveObject())));assert.equal(await page.evaluate(()=>JSON.stringify(STAW.saveObject().fleet)),original);
  await page.evaluate(()=>{const before=JSON.stringify(STAW.saveObject().fleet);try{STAW.loadText('S274\nDOES_NOT_EXIST')}catch{}if(before!==JSON.stringify(STAW.saveObject().fleet))throw Error('Failed import mutated fleet');});
- await page.locator('#cost-editor').click();await page.locator('#cost-search').fill('S274');await page.locator('[data-cost="ship:S274"]').fill('20');await page.locator('[data-cost="ship:S274"]').blur();await page.locator('#close-modal').click();
- await page.selectOption('#point-mode','spuds');assert.equal(await page.locator('#total').textContent(),'29');
- await page.reload();await page.waitForFunction(()=>!!window.STAW);assert.equal(await page.locator('#total').textContent(),'29');
+ await page.selectOption('#point-mode','spuds');assert.equal(await page.locator('#total').textContent(),'35');
+ await page.reload();await page.waitForFunction(()=>!!window.STAW);assert.equal(await page.locator('#total').textContent(),'35');
  await page.selectOption('#point-mode','standard');assert.equal(await page.locator('#total').textContent(),'35');
  await page.evaluate(()=>STAW.loadText('S274\nCap049\nC441'));assert.equal(await page.locator('#total').textContent(),'35');
  await page.evaluate(()=>STAW.loadText('S274\nC114\n#T271'));assert.equal(await page.locator('.fleet-card.hidden-card').count(),1);
@@ -42,6 +46,6 @@ const {chromium}=require(process.env.STAW_NODE_MODULES?p.join(process.env.STAW_N
  await page.locator('#export').click();assert.match(await page.locator('#modal-content').textContent(),/no verified route/);await page.locator('#close-modal').click();
  await page.evaluate(()=>STAW.loadText('S274\nCap049\nC441'));
  assert.deepEqual(errors,[]);
- console.log('Browser QA passed: load, search, equip, uniqueness, totals, faction penalty, SPUDS, persistence, rollback, exports, missing routes, mobile layout.');
+ console.log('Browser QA passed: load, search, equip, uniqueness, totals, faction penalty, face-value SPUDS mode, persistence, rollback, exports, missing routes, mobile layout.');
  await browser.close();
 })().catch(e=>{console.error(e);process.exit(1);});

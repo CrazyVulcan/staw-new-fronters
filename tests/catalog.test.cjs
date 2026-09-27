@@ -3,7 +3,7 @@ const root=p.resolve(__dirname,'..'),read=f=>JSON.parse(fs.readFileSync(p.join(r
 const data=read('public/data/data.json'),costs=read('public/data/card-costs.json'),routes=read('public/data/tts-routes.json'),aliases=read('public/data/aliases.json'),audit=read('public/data/id-audit.json'),rules=require('../src/rules.js');
 const cards=Object.entries(data).filter(([k])=>!['sets','shipClasses'].includes(k)).flatMap(([,v])=>v).filter(c=>c.id&&c.type!=='copy'),by=Object.fromEntries(cards.map(c=>[core.key(c),c]));
 test('Every converted record has a scalar, globally unique ID and one cost row',()=>{
- assert.equal(cards.length,2373);assert.equal(new Set(cards.map(c=>c.id)).size,cards.length);
+ assert.equal(cards.length,2296);assert.equal(new Set(cards.map(c=>c.id)).size,cards.length);
  assert.equal(new Set(cards.map(core.key)).size,cards.length);assert.equal(costs.length,cards.length);
  core.validateCosts(costs,by);assert.equal(audit.mismatches.length,0);
 });
@@ -12,6 +12,12 @@ test('Array IDs and duplicates have unambiguous aliases',()=>{
  assert.equal(cards.filter(c=>c.id==='S199').length,1);assert.ok(by['token:rule_borg_tractor_beam']);
  assert.equal(by['token:rule_specialzation'].name,'Specialization Cards (SCS)');
 });
+test('Alliance-only cards without a loadable TTS route are suppressed',()=>{
+ assert.equal(audit.suppressedAlliance.length,77);
+ assert.equal(cards.filter(c=>c.alliance&&!routes[core.key(c)]).length,0);
+ assert.equal(by['captain:AC0001'],undefined);
+ assert.ok(by['crew:AP1001']);assert.ok(routes['crew:AP1001']);
+});
 test('Every TTS route matches its original catalog identity and a local image',()=>{
  const catalog=read('vendor/tts-catalog.json');const original=new Map(catalog.cards.map(c=>[c.id,c]));
  assert.equal(Object.keys(routes).length,2142);
@@ -19,6 +25,9 @@ test('Every TTS route matches its original catalog identity and a local image',(
  const folders=fs.readdirSync(p.join(root,'public/cards'),{withFileTypes:true});
  assert.ok(folders.every(entry=>entry.isDirectory()));
  for(const folder of folders)assert.ok(fs.readdirSync(p.join(root,'public/cards',folder.name)).length<1000,folder.name);
+ assert.equal(routes['captain:Cap039'].displayFallback,true);
+ assert.equal(routes['captain:Cap039'].artImage,'cards/art/captain-Cap039.png');
+ assert.ok(fs.existsSync(p.join(root,'public',routes['captain:Cap039'].artImage)));
 });
 test('Saved fleets normalize legacy aliases without dropping unknown IDs',()=>{
  const saved={ships:[{id:'ship:S274',upgrades:[{id:'tech:T311a'}]}]};

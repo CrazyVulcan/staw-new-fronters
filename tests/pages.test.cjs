@@ -11,6 +11,7 @@ test('Root GitHub Pages entry point uses existing app with public asset paths',a
  assert.match(html,/data-asset-path="data\/card-costs\.json"/);
  assert.match(html,/href="public\/css\/font-staw\.css"/);
  assert.match(html,/src="src\/app\.js"/);
+ assert.doesNotMatch(html,/id="cost-editor"/);
  assert.match(utopia,/remodulatedAssetPath\("data\/data\.json"\)/);
  assert.match(css,/url\('public\/fonts\/Swiss1\.ttf'\)/);
  assert.match(css,/url\('src\/favicon\.svg'\)/);
@@ -28,7 +29,7 @@ test('Root GitHub Pages entry point uses existing app with public asset paths',a
  const fetchStatus=path=>new Promise((resolve,reject)=>http.get({host:'127.0.0.1',port,path},res=>{res.resume();res.on('end',()=>resolve(res.statusCode));}).on('error',reject));
  try{
   assert.match(await fetchText('/'),/public\/css\/font-staw\.css/);
-  for(const path of ['/style.css','/src/app.js','/public/data/data.json','/public/data/card-costs.json','/public/cards/ship/ship-S415.webp']){
+  for(const path of ['/style.css','/src/app.js','/public/data/data.json','/public/data/card-costs.json','/public/cards/ship/ship-S415.webp','/public/cards/art/captain-Cap039.png']){
    assert.equal(await fetchStatus(path),200,path);
   }
  }finally{
