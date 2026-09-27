@@ -1,6 +1,6 @@
 # Star Trek Attack Wing Remodulated
 
-A local fleet builder based on Utopia, with authentic card images, a ship-by-ship fleet spread, searchable and sortable cards, Utopia's equipment/cost rules, editable SPUDS values, and checked TTS exports.
+A local fleet builder based on Utopia, with authentic card images, a ship-by-ship fleet spread, searchable and sortable cards, Utopia's equipment/cost rules, and checked TTS exports.
 
 ## Start
 
@@ -37,9 +37,7 @@ Utopia's generated slots marked `faceDown` are treated as hidden cards throughou
 
 Set `spudsCost` to a number to override the base points in SPUDS mode; use `null` to inherit the standard value. Zero is a valid override. Utopia equipment modifiers and faction penalties still apply. No unprovided SPUDS cost schedule or alternative penalty rules have been invented.
 
-Use **SPUDS cost editor** at the bottom of the site to search and edit values, import a complete cost file, and download the full edited catalog. Browser edits remain local until you replace the file above. A saved fleet carries its cost profile and can restore it on another browser.
-
-If you edit the file outside the browser, use the editor's **Import costs** to load that file into an existing browser session; its saved profile otherwise takes precedence. On a fresh browser the bundled file is used immediately. Rebuild `dist/` after file changes when serving the built site.
+The browser cost editor is intentionally hidden during the 2E preparation pass. With every `spudsCost` set to `null`, both point modes use the standard face-value catalog. Future SPUDS or variant schedules can still be supplied by editing this file and rebuilding `dist/`.
 
 Three upstream cards have computed standard costs (Gareb, Marlena Moreau, Emergency Force Field); their original standard calculation is retained. An explicit SPUDS override replaces their base calculation. `null` standard values on reference cards mean not applicable, not a missing numeric zero.
 
@@ -47,12 +45,13 @@ The TTS importer reads its own card values. Exporting a SPUDS list does not rewr
 
 ## Catalog and ID audit
 
-- 2,373 canonical Utopia card/reference records converted, with globally unique scalar IDs.
+- 2,296 canonical Utopia card/reference records converted, with globally unique scalar IDs.
+- 77 Alliance-only records without a matching card in the supplied TTS catalog are suppressed. Alliance cards with a verified TTS route remain available.
 - Seven equivalent duplicate records merged, combining their expansion membership. Different editions and mechanically different cards retain their separate IDs even when their names match.
 - Array IDs and alternate-side IDs have explicit aliases. The accidentally duplicated Borg Tractor Beam reference ID is separated from the Specialization reference.
 - T053 and T057 keep stable tech catalog identities while retaining Utopia's multi-slot equipment behavior.
 - 2,142 verified canonical TTS routes, each with a local WebP front extracted from the exact source image and cell. All match the supplied TTS catalog's name/type.
-- **231 records have no verified route in the supplied save**, including all 42 resources and various reference/supplemental cards. They are still in the catalog and cost file; uncheck TTS-ready cards to see them. Unmapped cards render from converted rules data with STAW fonts. Export blocks any unmapped card and identifies it by name/ID. No substitute card or guessed image is exported.
+- **154 records have no verified route in the supplied save**, including all 42 resources and various reference/supplemental cards. They are still in the catalog and cost file; uncheck TTS-ready cards to see them. Unmapped cards render from converted rules data with STAW fonts. Export blocks any unmapped card and identifies it by name/ID. No substitute card or guessed image is exported.
 
 See `public/data/id-audit.json` for every merge, alias, correction, and missing mapping. `public/data/image-audit.json` reports asset extraction. This audit proves ID/type/name/cell consistency against the supplied mod; it is not an OCR review of every printed rule or an in-game TTS playtest.
 
