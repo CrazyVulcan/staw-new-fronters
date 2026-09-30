@@ -7,6 +7,7 @@ test('Root GitHub Pages entry point uses existing app with public asset paths',a
  for(const file of ['index.html','style.css','src/core.js','src/rules.js','src/app.js','public/css/font-staw.css','public/vendor/jquery.js','public/data/card-costs.json']){
   assert.ok(fs.existsSync(p.join(root,file)),file);
  }
+ assert.match(read('src/app.js'),/data-maneuver/);
  assert.match(html,/window\.RemodulatedConfig=\{assetBase:'public'\}/);
  assert.match(html,/data-asset-path="data\/card-costs\.json"/);
  assert.match(html,/href="public\/css\/font-staw\.css"/);
@@ -29,7 +30,7 @@ test('Root GitHub Pages entry point uses existing app with public asset paths',a
  const fetchStatus=path=>new Promise((resolve,reject)=>http.get({host:'127.0.0.1',port,path},res=>{res.resume();res.on('end',()=>resolve(res.statusCode));}).on('error',reject));
  try{
   assert.match(await fetchText('/'),/public\/css\/font-staw\.css/);
-  for(const path of ['/style.css','/src/app.js','/public/data/data.json','/public/data/card-costs.json','/public/cards/ship/ship-S415.webp','/public/cards/art/captain-Cap039.png']){
+  for(const path of ['/style.css','/src/app.js','/public/data/data.json','/public/data/card-costs.json','/public/data/maneuver-cards.json','/public/cards/ship/ship-S415.webp','/public/cards/art/captain-Cap039.png']){
    assert.equal(await fetchStatus(path),200,path);
   }
  }finally{
