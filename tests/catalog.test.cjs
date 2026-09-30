@@ -1,6 +1,6 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('fs'),p=require('path');
 const root=p.resolve(__dirname,'..'),read=f=>JSON.parse(fs.readFileSync(p.join(root,f),'utf8')),core=require('../src/core.js');
-const data=read('public/data/data.json'),costs=read('public/data/card-costs.json'),routes=read('public/data/tts-routes.json'),aliases=read('public/data/aliases.json'),audit=read('public/data/id-audit.json'),rules=require('../src/rules.js');
+const data=read('public/data/data.json'),costs=read('public/data/card-costs.json'),routes=read('public/data/tts-routes.json'),aliases=read('public/data/aliases.json'),audit=read('public/data/id-audit.json'),maneuverCards=read('public/data/maneuver-cards.json'),rules=require('../src/rules.js');
 const cards=Object.entries(data).filter(([k])=>!['sets','shipClasses'].includes(k)).flatMap(([,v])=>v).filter(c=>c.id&&c.type!=='copy'),by=Object.fromEntries(cards.map(c=>[core.key(c),c]));
 test('Every converted record has a scalar, globally unique ID and one cost row',()=>{
  assert.equal(cards.length,2296);assert.equal(new Set(cards.map(c=>c.id)).size,cards.length);
@@ -65,4 +65,14 @@ test('Lower Decks uses a shared crew position without the Utopia helper card',()
  rules.enhanceEquippedCard(lower,slot);assert.equal(lower.upgradeSlots.length,1);assert.equal(lower.upgradeSlots[0]._sharedRule,'lower-decks');
  assert.equal(lower.upgradeSlots[0].canEquip({...lower}),true);assert.equal(lower.upgradeSlots[0].canEquip(other),false);
  rules.enhanceEquippedCard(lower,slot);assert.equal(lower.upgradeSlots.length,1);assert.equal(rules.isInternalHelper({type:'crew',id:'C426'}),true);
+});
+test('Maneuver references cover every builder class with a card image or class grid',()=>{
+ const classNames=new Set(data.ships.map(ship=>ship.class));
+ assert.deepEqual(new Set(Object.keys(maneuverCards.classes)),classNames);
+ assert.ok(Object.values(maneuverCards.classes).every(entry=>entry.maneuvers||entry.cards.length));
+ assert.ok(Object.values(maneuverCards.classes).filter(entry=>entry.cards.length).length>=79);
+ const galaxy=maneuverCards.classes['Galaxy Class (MU)'];
+ assert.ok(galaxy.cards.some(card=>card.sourceShipId==='S108'));
+ assert.ok(galaxy.cards.every(card=>/^https:\/\//.test(card.sourceFace)));
+ for(const entry of Object.values(maneuverCards.classes))for(const card of entry.cards)assert.ok(fs.existsSync(p.join(root,'public',card.image)),card.image);
 });

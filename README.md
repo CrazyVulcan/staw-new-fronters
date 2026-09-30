@@ -14,7 +14,7 @@ Alternatively run `npm start` in this folder. Running the site does not require 
 
 1. Search/filter by faction, card type, expansion, unique status, name, ID, class, or rules text. Sort by name, cost, ID, or captain skill.
 2. Add ships, then select a ship header or one of its empty slots. Click Equip or drag a card onto a ship. Selecting a slot targets that particular slot.
-3. Click a card to read the full-size front and searchable rules. Printed scan values remain authentic; the SP values below each card show the calculated cost for your selected rules profile.
+3. Click a card to read the full-size front and searchable rules. Ship details and fleet headers also include a **Maneuver** button with the class card and a structured speed/difficulty grid. Printed scan values remain authentic; the SP values below each card show the calculated cost for your selected rules profile.
 4. Switch between card spread and compact list. Fleet and ship totals include Utopia's faction penalties and special cost rules. Set your own fleet limit.
 5. Save the fleet as JSON. Fleets auto-save in this browser; downloaded fleets also include their cost profile. Import accepts Remodulated JSON, original Utopia URL hashes/JSON, TTS schema-2 JSON, or one-ID-per-line lists. Unknown IDs stop import instead of being dropped.
 6. Export to TTS, then paste the result into **Fleet Setup** in the supplied Remodulated save. Both familiar Utopia ID text and schema-2 JSON are supported.
@@ -65,7 +65,9 @@ See `public/data/id-audit.json` for every merge, alias, correction, and missing 
 | `public/data/tts-routes.json` | Canonical IDs → verified TTS images/cells and local fronts |
 | `public/data/aliases.json` | Old identifiers → canonical identifiers |
 | `public/data/hidden-slot-audit.json` | Cards whose generated slots hold face-down/hidden cards |
+| `public/data/maneuver-cards.json` | Ship classes → supplied maneuver-card scans and structured grids |
 | `public/cards/` | 2,142 extracted local card fronts |
+| `public/maneuvers/` | Local maneuver-card fronts imported from the supplied TTS saved object |
 | `src/` | New interface and export/import code |
 | `vendor/utopia/` | Preserved Utopia source, including special card rules |
 | `vendor/tts-catalog.json` | Card catalog extracted from the supplied Remodulated save |
@@ -81,6 +83,8 @@ Source: AngryTribble/Star-Trek-Attack-Wing-Utopia at commit `478c9779ec901d2bae2
 For optional browser/Lua/asset tooling, run `npm install`. With the development server running, use `npm run test:browser` (Microsoft Edge) and `npm run test:tts`. Browser checks cover actual interactions, standard/SPUDS point totals, faction penalties, duplicate unique cards, save/reload, export, bad-import rollback, and mobile width. The Lua test executes the supplied save's actual `parseFleet` and `reviewFleet` on every verified route.
 
 `npm run convert` regenerates converted source catalogs and the audit, preserving existing editable costs and valid local image routes. `node scripts/assets.cjs "PATH TO LOCAL CARD SHEETS"` rebuilds local fronts from SHA-1-matched source sheets and downloads missing originals. Keep `.asset-cache/` local; it is not needed to run or distribute the site.
+
+`npm run import:maneuvers -- "PATH TO Maneuver Cards.json"` refreshes the maneuver reference catalog and downloads any new card fronts into `public/maneuvers/`. Existing local scans are reused. Multiple scans for one class are retained, and the builder selects an exact ship-ID match when the saved object provides one.
 
 ## Credits and license
 
