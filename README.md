@@ -25,6 +25,8 @@ The builder runs the original Utopia rules engine locally, including card-specif
 
 Remodulated adds a capability layer above that engine instead of asking players to equip bookkeeping cards. Lower Decks is the first converted rule: a Lower Decks crew in a printed crew slot exposes one linked position that accepts only another crew with the Lower Decks keyword. Both real cards are saved, priced, validated, and exported; Utopia's fake `C426` helper is not shown in the library.
 
+Flagship and Fleet Captain use the same split. The generic `R004` and `R010` resource records are zero-cost builder selectors; the selected faction card (`R004a`–`R004i` or `R010a`–`R010h`) is the real, priced card shown in the fleet and exported to TTS. The Voyager `Q030` bookkeeping card is also hidden: eligible U.S.S. Voyager slots expose a direct −2 SP control, record the required starting damage, and export only the real upgrade placed in that slot.
+
 Utopia's generated slots marked `faceDown` are treated as hidden cards throughout the builder. Hidden cards have a face-down badge in the fleet spread, remain included in cost and legality checks, and export as `#ID`. The Remodulated TTS importer strips the marker, spawns the card face down, and offsets it beneath the card that generated the slot. JSON exports carry the equivalent `"hidden": true` field.
 
 ## Edit card costs / SPUDS
@@ -50,8 +52,9 @@ The TTS importer reads its own card values. Exporting a SPUDS list does not rewr
 - Seven equivalent duplicate records merged, combining their expansion membership. Different editions and mechanically different cards retain their separate IDs even when their names match.
 - Array IDs and alternate-side IDs have explicit aliases. The accidentally duplicated Borg Tractor Beam reference ID is separated from the Specialization reference.
 - T053 and T057 keep stable tech catalog identities while retaining Utopia's multi-slot equipment behavior.
-- 2,142 verified canonical TTS routes, each with a local WebP front extracted from the exact source image and cell. All match the supplied TTS catalog's name/type.
-- **154 records have no verified route in the supplied save**, including all 42 resources and various reference/supplemental cards. They are still in the catalog and cost file; uncheck TTS-ready cards to see them. Unmapped cards render from converted rules data with STAW fonts. Export blocks any unmapped card and identifies it by name/ID. No substitute card or guessed image is exported.
+- 2,194 verified canonical TTS routes, each with a local WebP front extracted from the exact source image and cell. All match the supplied TTS catalog's name/type.
+- The catalog includes verified TTS objects for all eight Flagship cards, all eight Fleet Captain cards, and 36 single-card Resources recovered from the supplied legacy save. The generic Flagship/Fleet Captain selector records are intentionally virtual. Four composite Resources—Attack Fighters (two versions), Officer Cards, and Sick Bay—remain unmapped until their multi-object contents can be recovered accurately.
+- **102 records have no verified route in the supplied saves.** They are still in the catalog and cost file; uncheck TTS-ready cards to see them. Unmapped cards render from converted rules data with STAW fonts. Export blocks any unmapped real card and identifies it by name/ID. No substitute card or guessed image is exported.
 
 See `public/data/id-audit.json` for every merge, alias, correction, and missing mapping. `public/data/image-audit.json` reports asset extraction. This audit proves ID/type/name/cell consistency against the supplied mod; it is not an OCR review of every printed rule or an in-game TTS playtest.
 
@@ -66,12 +69,14 @@ See `public/data/id-audit.json` for every merge, alias, correction, and missing 
 | `public/data/aliases.json` | Old identifiers → canonical identifiers |
 | `public/data/hidden-slot-audit.json` | Cards whose generated slots hold face-down/hidden cards |
 | `public/data/maneuver-cards.json` | Ship classes → supplied maneuver-card scans and structured grids |
-| `public/cards/` | 2,142 extracted local card fronts |
+| `public/cards/` | 2,194 extracted local card fronts |
 | `public/maneuvers/` | Local maneuver-card fronts imported from the supplied TTS saved object |
 | `src/` | New interface and export/import code |
 | `vendor/utopia/` | Preserved Utopia source, including special card rules |
 | `vendor/tts-catalog.json` | Card catalog extracted from the supplied Remodulated save |
 | `vendor/tts-importer-source.lua` | Snapshot used for importer compatibility checks |
+| `scripts/import-resource-cards.cjs` | Imports verified Resource, Flagship, and Fleet Captain objects from a legacy TTS save |
+| `scripts/sync-tts-catalog-source.cjs` | Rebuilds the Lua importer's embedded catalog after verified routes change |
 | `scripts/update-tts-hidden-import.cjs` | Safe updater for `#ID` face-down TTS imports |
 
 Source: AngryTribble/Star-Trek-Attack-Wing-Utopia at commit `478c9779ec901d2bae2a60d1aec625dcace0f148`, the same revision recorded by the mod. Site builds do not rewrite a TTS save automatically; `scripts/update-tts-hidden-import.cjs` applies the matching `#ID` importer behavior to an explicitly supplied save and creates a backup first.
@@ -85,6 +90,8 @@ For optional browser/Lua/asset tooling, run `npm install`. With the development 
 `npm run convert` regenerates converted source catalogs and the audit, preserving existing editable costs and valid local image routes. `node scripts/assets.cjs "PATH TO LOCAL CARD SHEETS"` rebuilds local fronts from SHA-1-matched source sheets and downloads missing originals. Keep `.asset-cache/` local; it is not needed to run or distribute the site.
 
 `npm run import:maneuvers -- "PATH TO Maneuver Cards.json"` refreshes the maneuver reference catalog and downloads any new card fronts into `public/maneuvers/`. Existing local scans are reused. Multiple scans for one class are retained, and the builder selects an exact ship-ID match when the saved object provides one.
+
+`npm run import:resources -- "PATH TO LEGACY SAVE.json"` imports verified single-card Resource objects plus Flagship and Fleet Captain tiles. Run `npm run sync:tts-catalog` after conversion to refresh the catalog embedded in the Lua importer source.
 
 ## Credits and license
 

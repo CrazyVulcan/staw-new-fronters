@@ -30,6 +30,10 @@ const {chromium}=require(process.env.STAW_NODE_MODULES?p.join(process.env.STAW_N
  await page.evaluate(()=>STAW.loadText('S274\nC114\n#T271'));assert.equal(await page.locator('.fleet-card.hidden-card').count(),1);
  await page.locator('#export').click();assert.match(await page.locator('#export-text').inputValue(),/\n#T271\n/);await page.locator('#close-modal').click();
  await page.reload();await page.waitForFunction(()=>!!window.STAW);assert.equal(await page.locator('.fleet-card.hidden-card').count(),1);
+ await page.evaluate(()=>STAW.loadText('S274\nR004e'));assert.equal(await page.locator('#total').textContent(),'36');
+ assert.deepEqual(await page.evaluate(()=>({selector:STAW.fleet.resource.id,card:STAW.fleet.ships[0].resource.id,exported:JSON.parse(STAW.exportFleet('json')).ships[0].cards.map(c=>c.cardId)})),{selector:'R004',card:'R004e',exported:['R004e']});
+ await page.evaluate(()=>STAW.loadText('S274\nR010g'));assert.equal(await page.locator('#total').textContent(),'31');
+ assert.deepEqual(await page.evaluate(()=>({selector:STAW.fleet.resource.id,card:STAW.fleet.ships[0].resource.id,exported:JSON.parse(STAW.exportFleet('json')).ships[0].cards.map(c=>c.cardId)})),{selector:'R010',card:'R010g',exported:['R010g']});
  await page.evaluate(()=>STAW.loadText('S274\nCap049\nC441'));
  await page.locator('#fleet-name').fill('Task Force Enterprise');
  await page.selectOption('#type','ship');await page.selectOption('#faction','federation');await page.locator('#search').fill('');
@@ -46,6 +50,6 @@ const {chromium}=require(process.env.STAW_NODE_MODULES?p.join(process.env.STAW_N
  await page.locator('#export').click();assert.match(await page.locator('#modal-content').textContent(),/no verified route/);await page.locator('#close-modal').click();
  await page.evaluate(()=>STAW.loadText('S274\nCap049\nC441'));
  assert.deepEqual(errors,[]);
- console.log('Browser QA passed: load, search, equip, uniqueness, totals, faction penalty, face-value SPUDS mode, persistence, rollback, exports, missing routes, mobile layout.');
+ console.log('Browser QA passed: load, search, equip, uniqueness, totals, faction penalty, face-value SPUDS mode, resources, persistence, rollback, exports, missing routes, mobile layout.');
  await browser.close();
 })().catch(e=>{console.error(e);process.exit(1);});

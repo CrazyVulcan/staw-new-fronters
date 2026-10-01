@@ -20,7 +20,7 @@ test('Alliance-only cards without a loadable TTS route are suppressed',()=>{
 });
 test('Every TTS route matches its original catalog identity and a local image',()=>{
  const catalog=read('vendor/tts-catalog.json');const original=new Map(catalog.cards.map(c=>[c.id,c]));
- assert.equal(Object.keys(routes).length,2142);
+ assert.equal(Object.keys(routes).length,2194);
  for(const [k,r]of Object.entries(routes)){assert.equal(r.id,by[k].id);assert.equal(r.type,by[k].type);assert.equal(r.name,original.get(r.id).name);assert.ok(r.index>=0&&r.index<r.width*r.height);assert.match(r.localImage,new RegExp('^cards/'+r.type+'/'));assert.ok(fs.existsSync(p.join(root,'public',r.localImage)),k);}
  const folders=fs.readdirSync(p.join(root,'public/cards'),{withFileTypes:true});
  assert.ok(folders.every(entry=>entry.isDirectory()));
@@ -64,7 +64,20 @@ test('Lower Decks uses a shared crew position without the Utopia helper card',()
  const lower={type:'crew',id:'C414',name:'Ahni Jetal',text:'<b>(Lower Decks)</b>'},other={type:'crew',id:'C001',text:'Regular crew'},slot={type:['crew']};
  rules.enhanceEquippedCard(lower,slot);assert.equal(lower.upgradeSlots.length,1);assert.equal(lower.upgradeSlots[0]._sharedRule,'lower-decks');
  assert.equal(lower.upgradeSlots[0].canEquip({...lower}),true);assert.equal(lower.upgradeSlots[0].canEquip(other),false);
- rules.enhanceEquippedCard(lower,slot);assert.equal(lower.upgradeSlots.length,1);assert.equal(rules.isInternalHelper({type:'crew',id:'C426'}),true);
+ rules.enhanceEquippedCard(lower,slot);assert.equal(lower.upgradeSlots.length,1);assert.equal(rules.isInternalHelper({type:'crew',id:'C426'}),true);assert.equal(rules.isInternalHelper({type:'question',id:'Q030'}),true);
+});
+test('Resource selectors stay virtual while their chosen Flagship and Fleet Captain cards export',()=>{
+ const flagship=by['flagship:R004e'],captain=by['fleet-captain:R010g'];
+ assert.ok(flagship);assert.ok(captain);assert.equal(routes['flagship:R004e'].objectKind,'tile');assert.equal(routes['fleet-captain:R010g'].objectKind,'tile');assert.equal(routes['flagship:R004e'].objectScale.x,1.87760186);
+ const ship={...by['ship:S274'],resource:flagship,upgrades:[{occupant:captain}]};
+ const fleet={ships:[ship],resource:by['resource:R004']},payload=JSON.parse(core.ttsExport(fleet,routes,'json'));
+ assert.deepEqual(payload.resources,[]);assert.deepEqual(payload.ships[0].cards.map(card=>card.cardId),['R004e','R010g']);
+ assert.equal(core.isVirtual(by['resource:R004']),true);assert.equal(core.isVirtual(by['resource:R010']),true);
+});
+test('Voyager discount helper stays hidden from TTS while its equipped card exports',()=>{
+ const helper={...by['question:Q030'],upgradeSlots:[{type:['tech'],occupant:by['tech:T001']}]};
+ const ship={...by['ship:S274'],upgrades:[{occupant:helper}]},payload=JSON.parse(core.ttsExport({ships:[ship]},routes,'json'));
+ assert.deepEqual(payload.ships[0].cards.map(card=>card.cardId),['T001']);
 });
 test('Maneuver references cover every builder class with a card image or class grid',()=>{
  const classNames=new Set(data.ships.map(ship=>ship.class));
