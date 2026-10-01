@@ -1,7 +1,7 @@
 {
   "sourceCommit": "478c9779ec901d2bae2a60d1aec625dcace0f148",
   "cards": 2296,
-  "ttsRoutes": 2142,
+  "ttsRoutes": 2194,
   "merges": [
     {
       "key": "ship:S199",
@@ -360,24 +360,6 @@
       "reason": "No card in supplied TTS catalog"
     },
     {
-      "id": "R001",
-      "type": "resource",
-      "name": "Elite Attack Die",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R002",
-      "type": "resource",
-      "name": "Command Tokens",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R003",
-      "type": "resource",
-      "name": "Reinforcements Sideboard",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
       "id": "R004",
       "type": "resource",
       "name": "Flagship",
@@ -396,24 +378,6 @@
       "reason": "No card in supplied TTS catalog"
     },
     {
-      "id": "R007",
-      "type": "resource",
-      "name": "Skilled Helmsman",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R008",
-      "type": "resource",
-      "name": "Chief Engineer",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R009",
-      "type": "resource",
-      "name": "Counter Attack Die",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
       "id": "R010",
       "type": "resource",
       "name": "Fleet Captain",
@@ -423,186 +387,6 @@
       "id": "R011",
       "type": "resource",
       "name": "Officer Cards",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R012",
-      "type": "resource",
-      "name": "Improved Shields",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R013",
-      "type": "resource",
-      "name": "Advanced Targeting Systems",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R014",
-      "type": "resource",
-      "name": "High Yield Photon Torpedoes",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R015",
-      "type": "resource",
-      "name": "Officer Exchange Program",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R016",
-      "type": "resource",
-      "name": "Evasive Action Template",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R017",
-      "type": "resource",
-      "name": "Master Strategist Tokens (MST)",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R018",
-      "type": "resource",
-      "name": "Damage Control Team",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R019",
-      "type": "resource",
-      "name": "Ready Room",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R020",
-      "type": "resource",
-      "name": "Emergency Force Field",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R021",
-      "type": "resource",
-      "name": "Sabotage",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R022",
-      "type": "resource",
-      "name": "Protocol",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R023",
-      "type": "resource",
-      "name": "Advanced Technology",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R024",
-      "type": "resource",
-      "name": "Main Power Grid",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R025",
-      "type": "resource",
-      "name": "TACTICS",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R026",
-      "type": "resource",
-      "name": "Structural Damage Check",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R027",
-      "type": "resource",
-      "name": "General Orders",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R028",
-      "type": "resource",
-      "name": "Emergency Power",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R029",
-      "type": "resource",
-      "name": "Improved Hull",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R030",
-      "type": "resource",
-      "name": "Intercepted Messages",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R031",
-      "type": "resource",
-      "name": "Condition Alert",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R032",
-      "type": "resource",
-      "name": "Scan Cycle",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R033",
-      "type": "resource",
-      "name": "Fleet Commander",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R034",
-      "type": "resource",
-      "name": "Auxiliary Power",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R035",
-      "type": "resource",
-      "name": "All Stop",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R036",
-      "type": "resource",
-      "name": "Senior Staff",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R037",
-      "type": "resource",
-      "name": "Mutiny",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R038",
-      "type": "resource",
-      "name": "Co Pilot",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R039",
-      "type": "resource",
-      "name": "Captain's Chair",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R040",
-      "type": "resource",
-      "name": "Front Line Retrofit",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R041",
-      "type": "resource",
-      "name": "Long-Range Probe",
       "reason": "No card in supplied TTS catalog"
     },
     {
@@ -720,54 +504,6 @@
       "reason": "No card in supplied TTS catalog"
     },
     {
-      "id": "R010a",
-      "type": "fleet-captain",
-      "name": "Federation",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R010b",
-      "type": "fleet-captain",
-      "name": "Dominion",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R010c",
-      "type": "fleet-captain",
-      "name": "Romulan",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R010d",
-      "type": "fleet-captain",
-      "name": "Klingon",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R010e",
-      "type": "fleet-captain",
-      "name": "Independent (Klingon)",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R010f",
-      "type": "fleet-captain",
-      "name": "Independent (Federation)",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R010g",
-      "type": "fleet-captain",
-      "name": "Independent (Romulan)",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R010h",
-      "type": "fleet-captain",
-      "name": "Independent (Dominion)",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
       "id": "R011a",
       "type": "officer",
       "name": "First Officer",
@@ -789,54 +525,6 @@
       "id": "R011d",
       "type": "officer",
       "name": "Science Officer",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R004a",
-      "type": "flagship",
-      "name": "Romulan",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R004f",
-      "type": "flagship",
-      "name": "Independent (Romulan)",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R004b",
-      "type": "flagship",
-      "name": "Klingon",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R004g",
-      "type": "flagship",
-      "name": "Independent (Klingon)",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R004c",
-      "type": "flagship",
-      "name": "Dominion",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R004h",
-      "type": "flagship",
-      "name": "Independent (Dominion)",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R004e",
-      "type": "flagship",
-      "name": "Federation",
-      "reason": "No card in supplied TTS catalog"
-    },
-    {
-      "id": "R004i",
-      "type": "flagship",
-      "name": "Independent (Federation)",
       "reason": "No card in supplied TTS catalog"
     },
     {

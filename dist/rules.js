@@ -1,5 +1,5 @@
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.RemodulatedRules=api;})(typeof window==='object'?window:globalThis,function(){
- const INTERNAL_HELPERS=new Set(['crew:C426']);
+ const INTERNAL_HELPERS=new Set(['crew:C426','question:Q030']);
  const TRAITS=[{
   id:'lower-decks',label:'Lower Decks',matches:card=>card?.type==='crew'&&/\(\s*Lower Decks\s*\)/i.test(String(card.text||''))
  }];

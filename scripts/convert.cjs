@@ -40,7 +40,7 @@ for(const c of cards){
   if(!face||!back){missing.push({id:c.id,type:c.type,name:c.name,reason:'Missing front or back image'});continue;}
   const width=sheet?.width||t.sheet?.width||1,height=sheet?.height||t.sheet?.height||1,index=(t.sheet?.ttsCardId||0)%100;
   if(index>=width*height)throw new Error('Sheet index outside image: '+key);
-  routes[key]={id:t.id,type:t.type,name:t.name,face,back,width,height,index,ttsCardId:t.sheet?.ttsCardId||null,assetSheet:t.assetSheet||null};
+  routes[key]={id:t.id,type:t.type,name:t.name,face,back,width,height,index,ttsCardId:t.sheet?.ttsCardId||null,assetSheet:t.assetSheet||null,...(t.objectKind?{objectKind:t.objectKind}:{}),...(t.objectScale?{objectScale:t.objectScale}:{})};
   const old=previousRoutes[key];if(old?.localImage&&old.face===face&&old.width===width&&old.height===height&&old.index===index){routes[key].localImage=old.localImage;routes[key].aspect=old.aspect;}
 }
 // The source sheet maps Cap039 to a Mr. Spock scan. Render the correct Archer
