@@ -96,4 +96,10 @@ test('TTS deploy uses published card fronts, circular dials, and maneuver refere
  assert.match(lua,/CustomTile=\{Type=2,Thickness=0\.12/);
  assert.match(lua,/role=="reference"/);
  assert.match(lua,/https:\/\/crazyvulcan\.github\.io\/staw-remodulated\/public\/maneuvers\//);
+ assert.match(lua,/target=SHIP_DATA\["ships"\]/);
+ assert.match(lua,/target=SHIP_DATA\["classes"\]/);
+ const physical=JSON.parse(lua.match(/SHIP_DATA = JSON\.decode\(\[===\[(.*?)\]===\]\)/s)[1]);
+ for(const match of lua.matchAll(/\{target=SHIP_DATA\["(ships|classes)"\],offset=-1,json=\[===\[(.*?)\]===\]}/gs))Object.assign(physical[match[1]],JSON.parse(match[2]));
+ assert.equal(Object.keys(physical.ships).length,390);assert.equal(Object.keys(physical.classes).length,82);
+ assert.ok(Object.values(physical.ships).every(ship=>ship.model&&physical.classes[ship.profile]));
 });
