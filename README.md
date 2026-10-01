@@ -93,6 +93,8 @@ For optional browser/Lua/asset tooling, run `npm install`. With the development 
 
 `npm run import:resources -- "PATH TO LEGACY SAVE.json"` imports verified single-card Resource objects plus Flagship and Fleet Captain tiles. Run `npm run sync:tts-catalog` after conversion to refresh the catalog embedded in the Lua importer source.
 
+The synced TTS catalog uses the site's published individual card front whenever that card has a normal shared back; this includes the verified Resource cards such as R028. Unique-back sprite sheets remain paired until individual backs are available. Ship deployment also creates the best matching local maneuver-reference scan beneath the maneuver dial, and the dial itself is spawned as a circular custom tile.
+
 ## Credits and license
 
 Utopia by ComaToes and contributors KFNEXUS, jsterner73, CrazyVulcan, wiegeabo, SpinStabilized, catsgotmytongue, AngryTribble, and Relequestual. Utopia code is LGPL-3.0; this derivative retains that license and the upstream source. See THIRD_PARTY.md and the included license texts. Star Trek / Attack Wing names and card artwork remain the property of their respective owners.
