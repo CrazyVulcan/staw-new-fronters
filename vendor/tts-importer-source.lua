@@ -1252,7 +1252,10 @@ local function overlaps(a,ashape,b,bshape)
     end
     for _,axis in ipairs(axes) do
         local ux,uz=axis[1],axis[2]
-        if math.abs(dx*ux+dz*uz)>=extent(ashape,yawA,ux,uz)+extent(bshape,yawB,ux,uz)+0.02 then return false end
+        -- Edge contact is legal. Do not add clearance here: latestLegal already
+        -- converges on the last non-overlapping pose, so clearance leaves a
+        -- visible gap between bases after a bump.
+        if math.abs(dx*ux+dz*uz)>=extent(ashape,yawA,ux,uz)+extent(bshape,yawB,ux,uz) then return false end
     end
     return true
 end

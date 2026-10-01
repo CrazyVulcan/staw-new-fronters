@@ -103,3 +103,8 @@ test('TTS deploy uses published card fronts, circular dials, and maneuver refere
  assert.equal(Object.keys(physical.ships).length,390);assert.equal(Object.keys(physical.classes).length,82);
  assert.ok(Object.values(physical.ships).every(ship=>ship.model&&physical.classes[ship.profile]));
 });
+test('Bump resolution converges to base-edge contact without a clearance gap',()=>{
+ const lua=fs.readFileSync(p.join(root,'vendor/tts-importer-source.lua'),'utf8');
+ assert.match(lua,/math\.abs\(dx\*ux\+dz\*uz\)>=extent\(ashape,yawA,ux,uz\)\+extent\(bshape,yawB,ux,uz\) then return false/);
+ assert.doesNotMatch(lua,/extent\(bshape,yawB,ux,uz\)\+0\.02 then return false/);
+});
