@@ -89,3 +89,11 @@ test('Maneuver references cover every builder class with a card image or class g
  assert.ok(galaxy.cards.every(card=>/^https:\/\//.test(card.sourceFace)));
  for(const entry of Object.values(maneuverCards.classes))for(const card of entry.cards)assert.ok(fs.existsSync(p.join(root,'public',card.image)),card.image);
 });
+test('TTS deploy uses published card fronts, circular dials, and maneuver reference tiles',()=>{
+ const lua=fs.readFileSync(p.join(root,'vendor/tts-importer-source.lua'),'utf8');
+ assert.match(lua,/https:\/\/crazyvulcan\.github\.io\/staw-remodulated\/public\/cards\/resource\/resource-R028\.webp/);
+ assert.match(lua,/if card\.publishedFace then card\.cardImage=card\.publishedFace;card\.sheet=nil end/);
+ assert.match(lua,/CustomTile=\{Type=2,Thickness=0\.12/);
+ assert.match(lua,/role=="reference"/);
+ assert.match(lua,/https:\/\/crazyvulcan\.github\.io\/staw-remodulated\/public\/maneuvers\//);
+});
